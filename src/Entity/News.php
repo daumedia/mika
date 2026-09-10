@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\NewsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: NewsRepository::class)]
+#[UniqueEntity(fields: ['slug'], message: 'Dëse Slug ass schonn a Gebrauch.')]
 class News
 {
     #[ORM\Id]

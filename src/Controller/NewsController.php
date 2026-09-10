@@ -22,7 +22,7 @@ class NewsController extends AbstractController
     #[Route('/en/news/{slug}', name: 'app_news_show_en', defaults: ['_locale' => 'en'])]
     public function show(string $slug, NewsRepository $newsRepository): Response
     {
-        $article = $newsRepository->findOneBy(['slug' => $slug]);
+        $article = $newsRepository->findOnePublishedBySlug($slug);
 
         if (!$article) {
             throw $this->createNotFoundException();
