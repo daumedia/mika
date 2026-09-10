@@ -2,19 +2,19 @@
 
 Stand: 2026-09-10 · Stack-Profil: `symfony-doctrine` · Artefaktpfad: `docs/`
 
-Bestandsinventar, rückwärts aus dem Code erfasst (`sdd-erfassen`, Phase 1). Alle Features
-sind `bestand` — gebaut, bevor die Kette da war, noch ohne `spec.md`/`design.md`. IDs mit
-`B`-Präfix. Rückerfassung erfolgt Feature für Feature in eigenen Sessions über
-`/sdd-erfassen B01`.
+Bestandsinventar, rückwärts aus dem Code erfasst (`sdd-erfassen`). Phase 1 (Kartierung)
+und Phase 2 (Rückerfassung) sind **abgeschlossen**: jedes Feature hat `spec.md` und
+`design.md`, alle stehen auf `rekonstruiert`. IDs mit `B`-Präfix. Nächster Schritt ist die
+QA je Feature (`/sdd-qa BNN`), danach der Auditbericht (`/sdd-erfassen abschluss`).
 
 | ID | Feature | Prio | Status | Abhängig von | Zuletzt |
 |---|---|---|---|---|---|
-| B01 | Admin-Login | P0 | bestand | — | 2026-09-10 |
-| B02 | Neuigkeiten verwalten | P0 | bestand | B01 | 2026-09-10 |
-| B03 | Neuigkeiten lesen | P0 | bestand | B02 | 2026-09-10 |
-| B04 | Startseite | P0 | bestand | B03, B06 | 2026-09-10 |
-| B05 | Kontaktseite | P1 | bestand | B06 | 2026-09-10 |
-| B06 | Zweisprachigkeit (LB/EN) | P0 | bestand | — | 2026-09-10 |
+| B01 | Admin-Login | P0 | rekonstruiert | — | 2026-09-10 |
+| B02 | Neuigkeiten verwalten | P0 | rekonstruiert | B01 | 2026-09-10 |
+| B03 | Neuigkeiten lesen | P0 | rekonstruiert | B02 | 2026-09-10 |
+| B04 | Startseite | P0 | rekonstruiert | B03, B06 | 2026-09-10 |
+| B05 | Kontaktseite | P1 | rekonstruiert | B06 | 2026-09-10 |
+| B06 | Zweisprachigkeit (LB/EN) | P0 | rekonstruiert | — | 2026-09-10 |
 
 ## Wo die Features im Code leben
 
@@ -49,10 +49,22 @@ Nach **Risiko**, nicht nach Nummer — die Rückerfassung ist die Eintrittskarte
    notieren, nicht zu reparieren.
 6. **B04 Startseite** — reine Darstellung, zuletzt.
 
-## Hinweis zum Umfang
+## Rückerfassung abgeschlossen (2026-09-10)
 
-Sechs Features = sechs Rückerfassungs-Sessions. Danach `/sdd-erfassen abschluss` für den
-Auditbericht. Kein Feature wird hier verändert — Befunde werden notiert und erst nach der
-QA über den Fehlerauftrag-Eingang von `sdd-build` behoben.
+Alle sechs Features sind `rekonstruiert` — `spec.md` und `design.md` liegen vor und
+beschreiben den Ist-Zustand. Kein Feature wurde verändert; Befunde stehen unter
+*Fehlbestand* in den jeweiligen Specs und werden erst nach der QA über den
+Fehlerauftrag-Eingang von `sdd-build` behoben.
 
-**Nächster Schritt:** `/sdd-erfassen B01`
+Dringlichste Befunde aus der Rückerfassung (für die QA vorzumerken):
+
+| Feature | Befund | Schwere (Einschätzung) |
+|---|---|---|
+| B01 | Dev-Fixture `mika`/`admin` + kein Login-Rate-Limit | kritisch, sobald prod-nah |
+| B03 | `show()` ohne Datumsfilter — geplante Beiträge per Direkt-URL sichtbar | mittel–hoch |
+| B02 | Slug ohne `UniqueEntity` → 500 bei Duplikat | mittel |
+| B04 | `|raw` auf Übersetzungen (latenter XSS-Pfad) | niedrig |
+| B06/alle | Google Fonts hotlinked (IP-Abfluss), doppelte Asset-Pipeline | niedrig–mittel |
+
+**Nächster Schritt:** QA je Feature in Risikoreihenfolge — `/sdd-qa B01`, dann B02, B03,
+B06, B05, B04. Nach allen QA-Läufen: `/sdd-erfassen abschluss` für den Auditbericht.
