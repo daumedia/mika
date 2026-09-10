@@ -1,0 +1,53 @@
+# Alles, was im Image nichts verloren hat oder dort neu entsteht.
+# Kleinerer Build-Kontext = schnellere Builds und weniger Cache-Invalidierung.
+
+# --- wird im Image selbst erzeugt ---
+/vendor/
+/node_modules/
+/var/
+/public/build/
+/public/bundles/
+/public/assets/
+/assets/vendor/
+
+# ⚠ /public/build/ MUSS ignoriert werden: Der Node-Stage baut es neu, und COPY
+# löscht nichts. Läge der committete Stand mit im Kontext, blieben die alten
+# gehashten Dateien im Image liegen — Müll, der bei jedem Deploy wächst.
+#
+# ⚠ /assets/vendor/ und /public/assets/ sind gitignored und werden im
+# runtime-Stage über `importmap:install` und `asset-map:compile` neu erzeugt.
+
+# --- Werkzeug und Metadaten ---
+/.git/
+/.github/
+/.idea/
+/.claude/
+/.phpunit.cache/
+/.editorconfig
+/compose.override.yaml
+/docker-compose.yml
+/Makefile
+/Dockerfile
+/.dockerignore
+
+# --- Geheimnisse und lokale Overrides: dürfen NIE ins Image ---
+/.env.local
+/.env.local.php
+/.env.*.local
+/.env.test
+/config/secrets/
+
+# --- Test- und Entwicklungsartefakte ---
+/tests/
+/phpunit.dist.xml
+/phpunit.xml
+
+# --- Dokumentation und SDD-Artefakte (im Betrieb ungenutzt) ---
+/docs/
+/features/
+/CLAUDE.md
+
+# --- Sonstiges ---
+**/.DS_Store
+npm-debug.log
+yarn-error.log
