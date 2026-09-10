@@ -30,6 +30,22 @@ class NewsRepository extends ServiceEntityRepository
     }
 
     /**
+     * Einzelbeitrag per Slug — nur wenn bereits veröffentlicht (published_at <= now).
+     * Verhindert, dass zukünftig datierte („geplante") Beiträge per Direkt-URL sichtbar
+     * sind (BF-08).
+     */
+    public function findOnePublishedBySlug(string $slug): ?News
+    {
+        return $this->createQueryBuilder('n')
+            ->where('n.slug = :slug')
+            ->andWhere('n.publishedAt <= :now')
+            ->setParameter('slug', $slug)
+            ->setParameter('now', new \DateTimeImmutable())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
      * @return News[]
      */
     public function findLatest(int $limit = 3): array

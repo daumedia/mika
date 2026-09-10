@@ -9,12 +9,12 @@ QA je Feature (`/sdd-qa BNN`), danach der Auditbericht (`/sdd-erfassen abschluss
 
 | ID | Feature | Prio | Status | Abhängig von | Zuletzt |
 |---|---|---|---|---|---|
-| B01 | Admin-Login | P0 | rekonstruiert | — | 2026-09-10 |
-| B02 | Neuigkeiten verwalten | P0 | rekonstruiert | B01 | 2026-09-10 |
-| B03 | Neuigkeiten lesen | P0 | rekonstruiert | B02 | 2026-09-10 |
-| B04 | Startseite | P0 | rekonstruiert | B03, B06 | 2026-09-10 |
-| B05 | Kontaktseite | P1 | rekonstruiert | B06 | 2026-09-10 |
-| B06 | Zweisprachigkeit (LB/EN) | P0 | rekonstruiert | — | 2026-09-10 |
+| B01 | Admin-Login | P0 | approved | — | 2026-09-10 · QA grün nach Fix (Throttling, Fixture, Logout-CSRF) |
+| B02 | Neuigkeiten verwalten | P0 | approved | B01 | 2026-09-10 · QA grün nach Fix (Slug-UniqueEntity) |
+| B03 | Neuigkeiten lesen | P0 | approved | B02 | 2026-09-10 · QA grün nach Fix (Datumsfilter show) |
+| B04 | Startseite | P0 | review | B03, B06 | 2026-09-10 · QA: production-ready, 1 niedrig |
+| B05 | Kontaktseite | P1 | review | B06 | 2026-09-10 · QA: production-ready, 1 niedrig |
+| B06 | Zweisprachigkeit (LB/EN) | P0 | review | — | 2026-09-10 · QA: production-ready, 1 niedrig |
 
 ## Wo die Features im Code leben
 
@@ -49,22 +49,27 @@ Nach **Risiko**, nicht nach Nummer — die Rückerfassung ist die Eintrittskarte
    notieren, nicht zu reparieren.
 6. **B04 Startseite** — reine Darstellung, zuletzt.
 
-## Rückerfassung abgeschlossen (2026-09-10)
+## QA abgeschlossen — alle Features production-ready (2026-09-10)
 
-Alle sechs Features sind `rekonstruiert` — `spec.md` und `design.md` liegen vor und
-beschreiben den Ist-Zustand. Kein Feature wurde verändert; Befunde stehen unter
-*Fehlbestand* in den jeweiligen Specs und werden erst nach der QA über den
-Fehlerauftrag-Eingang von `sdd-build` behoben.
+Alle sechs Features sind geprüft (funktionale Tests + Angriffsdurchlauf, 40 Tests grün).
+**Verdict überall production-ready: ja.** Die blockierenden und mittleren Befunde wurden
+über `sdd-build` behoben und erneut geprüft:
 
-Dringlichste Befunde aus der Rückerfassung (für die QA vorzumerken):
+| Feature | Status | Behoben | Offen (niedrig) |
+|---|---|---|---|
+| B01 Admin-Login | approved | Login-Throttling, Fixture-Passwort, Logout-CSRF | — |
+| B02 News verwalten | approved | Slug `UniqueEntity` (500 → Feldfehler) | category-DB, Voter, Inline-JS |
+| B03 News lesen | approved | Datumsfilter in `show()` (Vorab-Leck) | Paginierung |
+| B04 Startseite | review | — (nur niedrig) | `\|raw` auf Übersetzungen |
+| B05 Kontaktseite | review | — (nur niedrig) | `ContactType` toter Code |
+| B06 Zweisprachigkeit | review | — (nur niedrig) | kein `hreflang` |
 
-| Feature | Befund | Schwere (Einschätzung) |
-|---|---|---|
-| B01 | Dev-Fixture `mika`/`admin` + kein Login-Rate-Limit | kritisch, sobald prod-nah |
-| B03 | `show()` ohne Datumsfilter — geplante Beiträge per Direkt-URL sichtbar | mittel–hoch |
-| B02 | Slug ohne `UniqueEntity` → 500 bei Duplikat | mittel |
-| B04 | `|raw` auf Übersetzungen (latenter XSS-Pfad) | niedrig |
-| B06/alle | Google Fonts hotlinked (IP-Abfluss), doppelte Asset-Pipeline | niedrig–mittel |
+B04–B06 bleiben `review` (Bestandsfeatures mit nur niedrigen Befunden; sie sind
+production-ready, wurden aber nicht ausgeliefert). Details in den `qa-report.md` und in
+`befunde.md`.
 
-**Nächster Schritt:** QA je Feature in Risikoreihenfolge — `/sdd-qa B01`, dann B02, B03,
-B06, B05, B04. Nach allen QA-Läufen: `/sdd-erfassen abschluss` für den Auditbericht.
+**Systemweite Änderung:** neue Abhängigkeit `symfony/rate-limiter` (für Login-Throttling).
+
+**Nächster Schritt:** `/sdd-erfassen abschluss` für den Auditbericht; die niedrigen Befunde
+(BF-05…07, 09, 10–12) und Betriebsthemen (Google Fonts, doppelte Asset-Pipeline, `APP_ENV`)
+gehören in `sdd-betrieb`.
