@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * QA B05 · Kontaktseite — funktionale Nachweise gegen features/B05-kontakt/spec.md.
- * Bestaetigt: mailto/Links, KEIN Formular (ContactType ist toter Code).
+ * Bestaetigt: mailto/Links, KEIN Formular (der ungenutzte ContactType wurde entfernt, BF-11).
  */
 final class B05KontaktTest extends WebTestCase
 {

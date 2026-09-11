@@ -30,7 +30,7 @@
 
                 {# Tagline #}
                 <p class="fade-up-delay-3 text-[1.15rem] sm:text-[1.35rem] text-white/60 font-light leading-relaxed mb-12 max-w-md">
-                    {{ 'home.hero.tagline'|trans|raw }}
+                    {{ 'home.hero.tagline'|trans }} <em>Kayl-Téiteng</em>
                 </p>
 
                 {# CTAs #}
@@ -76,7 +76,7 @@
                 <div class="lg:sticky lg:top-32 lg:self-start">
                     <p class="section-label mb-6">{{ 'home.about.label'|trans }}</p>
                     <h2 class="font-display text-[1.85rem] sm:text-[2.35rem] font-bold text-navy leading-[1.2]">
-                        {{ 'home.about.headline'|trans|raw }}
+                        {{ 'home.about.headline_pre'|trans }}<em>{{ 'home.about.headline_em'|trans }}</em>{{ 'home.about.headline_post'|trans }}
                     </h2>
                 </div>
 
@@ -226,7 +226,7 @@
                                     {{ article.publishedAt|date('d.m.Y') }}
                                 </time>
                                 <span class="px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider rounded-full bg-blue-light text-blue">
-                                    {{ ('home.themes.' ~ article.category ~ '.title')|trans }}
+                                    {{ ('home.themes.' ~ article.category.value ~ '.title')|trans }}
                                 </span>
                             </div>
                             <h3 class="font-display text-[1.05rem] font-semibold text-navy leading-snug group-hover:text-blue transition-colors duration-300">

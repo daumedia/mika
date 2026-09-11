@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\News;
+use App\Enum\NewsCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -54,7 +55,7 @@ final class B04StartseiteTest extends WebTestCase
         $em = static::getContainer()->get(EntityManagerInterface::class);
         $n = new News();
         $n->setTitleLb('Vorschau-Beitrag')->setTitleEn('Preview')->setSummaryLb('s')->setSummaryEn('s')
-            ->setContentLb('c')->setContentEn('c')->setCategory('youth')
+            ->setContentLb('c')->setContentEn('c')->setCategory(NewsCategory::Youth)
             ->setSlug('vorschau')->setPublishedAt(new \DateTimeImmutable('2026-01-01 10:00:00'));
         $em->persist($n);
         $em->flush();

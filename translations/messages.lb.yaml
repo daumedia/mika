@@ -10,7 +10,7 @@ home.hero.firstname: Mika
 home.hero.lastname: Ferreira
 home.hero.greeting: Moien, ech sinn
 home.hero.name: Mika Ferreira
-home.hero.tagline: "Är Stëmm fir <em>Kayl-Téiteng</em>"
+home.hero.tagline: "Är Stëmm fir"
 home.hero.subtitle: Gemeinderot · DP · Kayl-Téiteng
 home.hero.cta: Meng Themen
 home.hero.cta_primary: Meng Themen
@@ -19,7 +19,9 @@ home.hero.scroll: Erof scrollen
 
 # About Section
 home.about.label: Iwwer mech
-home.about.headline: "Eng Stëmm, déi aus <em>Erfarung</em> schwätzt."
+home.about.headline_pre: "Eng Stëmm, déi aus "
+home.about.headline_em: Erfarung
+home.about.headline_post: " schwätzt."
 home.about.title: Iwwer mech
 home.about.text: >
     Als Gemeinderot vun der DP zu Kayl-Téiteng setzen ech mech fir eng modern,

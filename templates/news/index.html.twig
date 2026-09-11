@@ -37,7 +37,7 @@
                                     {{ article.publishedAt|date('d.m.Y') }}
                                 </time>
                                 <span class="px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider rounded-full bg-blue-light text-blue">
-                                    {{ ('home.themes.' ~ article.category ~ '.title')|trans }}
+                                    {{ ('home.themes.' ~ article.category.value ~ '.title')|trans }}
                                 </span>
                             </div>
                             <h2 class="font-display text-[1.2rem] sm:text-[1.35rem] font-semibold text-navy mb-3 group-hover:text-blue transition-colors duration-300 leading-snug">

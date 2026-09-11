@@ -5,6 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Mika Ferreira — DP Kayl-Téiteng{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇱🇺</text></svg>">
+        {# hreflang-Alternates (BF-12): jede öffentliche Seite gibt es zweisprachig unter
+           eigener URL. Nur lokalisierte Routen bekommen Alternates — Admin/Login stehen
+           nicht in der Map und bleiben aussen vor. x-default zeigt auf LU (verbindlich). #}
+        {% set locale_routes = {
+            'app_home':           {lb: 'app_home',        en: 'app_home_en'},
+            'app_home_en':        {lb: 'app_home',        en: 'app_home_en'},
+            'app_news':           {lb: 'app_news',        en: 'app_news_en'},
+            'app_news_en':        {lb: 'app_news',        en: 'app_news_en'},
+            'app_news_show':      {lb: 'app_news_show',   en: 'app_news_show_en'},
+            'app_news_show_en':   {lb: 'app_news_show',   en: 'app_news_show_en'},
+            'app_contact':        {lb: 'app_contact',     en: 'app_contact_en'},
+            'app_contact_en':     {lb: 'app_contact',     en: 'app_contact_en'},
+            'app_impressum':      {lb: 'app_impressum',   en: 'app_impressum_en'},
+            'app_impressum_en':   {lb: 'app_impressum',   en: 'app_impressum_en'},
+            'app_datenschutz':    {lb: 'app_datenschutz', en: 'app_datenschutz_en'},
+            'app_datenschutz_en': {lb: 'app_datenschutz', en: 'app_datenschutz_en'}
+        } %}
+        {% set hreflang = locale_routes[app.request.attributes.get('_route')] ?? null %}
+        {% if hreflang %}
+            {# nur echte Pfad-Parameter (z. B. slug) übernehmen — der Route-Default
+               _locale würde sonst als ?_locale=… an die Gegen-Sprach-URL gehängt. #}
+            {% set hreflang_params = app.request.attributes.get('_route_params', {})|filter((v, k) => k != '_locale') %}
+            <link rel="alternate" hreflang="lb" href="{{ url(hreflang.lb, hreflang_params) }}">
+            <link rel="alternate" hreflang="en" href="{{ url(hreflang.en, hreflang_params) }}">
+            <link rel="alternate" hreflang="x-default" href="{{ url(hreflang.lb, hreflang_params) }}">
+        {% endif %}
         {# Fraunces + Figtree werden lokal aus public/fonts/ ausgeliefert
            (@font-face in assets/styles/app.css) — kein Hotlink zu Google,
            keine Besucher-IP an Google (Datenschutz Stufe A). #}

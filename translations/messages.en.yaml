@@ -10,7 +10,7 @@ home.hero.firstname: Mika
 home.hero.lastname: Ferreira
 home.hero.greeting: Hi, I'm
 home.hero.name: Mika Ferreira
-home.hero.tagline: "Your Voice for <em>Kayl-Téiteng</em>"
+home.hero.tagline: "Your Voice for"
 home.hero.subtitle: Municipal Councillor · DP · Kayl-Téiteng
 home.hero.cta: My Topics
 home.hero.cta_primary: My Topics
@@ -19,7 +19,9 @@ home.hero.scroll: Scroll down
 
 # About Section
 home.about.label: About me
-home.about.headline: "A voice that speaks from <em>experience</em>."
+home.about.headline_pre: "A voice that speaks from "
+home.about.headline_em: experience
+home.about.headline_post: "."
 home.about.title: About Me
 home.about.text: >
     As a municipal councillor for the DP in Kayl-Téiteng, I am committed to a modern,
