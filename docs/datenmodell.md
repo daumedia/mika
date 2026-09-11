@@ -19,7 +19,7 @@ es gibt keinen Übersetzungs-Join.
 | `summaryEn` | `summary_en` | LONGTEXT | nein | Kurzfassung EN |
 | `contentLb` | `content_lb` | LONGTEXT | nein | Fließtext LB |
 | `contentEn` | `content_en` | LONGTEXT | nein | Fließtext EN |
-| `category` | `category` | VARCHAR(100) | nein | freie Zeichenkette auf DB-Ebene |
+| `category` | `category` | VARCHAR(100) | nein | Backed-Enum `App\Enum\NewsCategory` (`enumType`), Werte `inclusion`/`youth`/`housing`/`culture` — Spaltentyp bleibt VARCHAR |
 | `slug` | `slug` | VARCHAR(255) | nein | **unique** (`UNIQ_1DD39950989D9B62`), sprachübergreifend, englisch-basiert |
 | `publishedAt` | `published_at` | DATETIME | nein | als `datetime_immutable` gemappt |
 
@@ -65,11 +65,12 @@ nicht gespeichert. Bei einem einzigen Betreiber ist das vertretbar.
 
 Lücken, die als Befund festzuhalten sind — **kein** stillschweigendes Zurechtrücken:
 
-- **`category` ist auf DB-Ebene unbeschränkt** (VARCHAR(100), kein CHECK/Enum). Erzwungen
-  wird die Auswahl (`inclusion`, `youth`, `housing`, `culture`) nur im `NewsType`-Formular.
-  Ein Wert außerhalb dieser vier — per Direktzugriff oder künftigem Code — führt im
-  Template zu einem fehlenden Übersetzungsschlüssel `home.themes.<category>.title`.
-  Kandidat für ein Doctrine-Enum. → Feature B02.
+- ~~**`category` ist auf DB-Ebene unbeschränkt** (VARCHAR(100), kein CHECK/Enum)~~ ✅
+  behoben 2026-09-11 (BF-05): `category` ist jetzt ein PHP-Backed-Enum
+  `App\Enum\NewsCategory` (`enumType` am Mapping), die vier Werte (`inclusion`, `youth`,
+  `housing`, `culture`) sind im Code typgesichert. Der Spaltentyp bleibt VARCHAR(100) — die
+  Backing-Values werden gespeichert, es war keine Migration nötig. Ein ungültiger Wert
+  scheitert nun schon bei der Hydration, nicht erst am fehlenden Übersetzungsschlüssel.
 - **Kein `created_at` / `updated_at`.** Nur `published_at`, das der Redakteur frei setzt.
   Anlage- und Änderungszeitpunkt sind nicht nachvollziehbar.
 - **`published_at` ist ein naives DATETIME** ohne Zeitzone; verglichen wird gegen

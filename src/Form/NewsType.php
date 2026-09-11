@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\News;
+use App\Enum\NewsCategory;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,14 +46,10 @@ class NewsType extends AbstractType
                 'constraints' => [new NotBlank()],
                 'attr' => ['rows' => 8],
             ])
-            ->add('category', ChoiceType::class, [
+            ->add('category', EnumType::class, [
                 'label' => 'Kategorie',
-                'choices' => [
-                    'Inklusioun' => 'inclusion',
-                    'Jugend' => 'youth',
-                    'Wunnen' => 'housing',
-                    'Kultur' => 'culture',
-                ],
+                'class' => NewsCategory::class,
+                'choice_label' => fn (NewsCategory $c): string => $c->label(),
                 'constraints' => [new NotBlank()],
             ])
             ->add('slug', TextType::class, [

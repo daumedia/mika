@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\News;
+use App\Enum\NewsCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -31,7 +32,7 @@ final class B03NewsLesenTest extends WebTestCase
         $n->setTitleLb($titleLb)->setTitleEn($titleEn)
             ->setSummaryLb('Kuerzfassung')->setSummaryEn('Summary')
             ->setContentLb($content)->setContentEn($content)
-            ->setCategory('youth')->setSlug($slug)
+            ->setCategory(NewsCategory::Youth)->setSlug($slug)
             ->setPublishedAt(new \DateTimeImmutable($when));
         $this->em->persist($n);
         $this->em->flush();

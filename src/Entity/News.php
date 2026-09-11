@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\NewsCategory;
 use App\Repository\NewsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,8 +35,8 @@ class News
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contentEn = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $category = null;
+    #[ORM\Column(length: 100, enumType: NewsCategory::class)]
+    private ?NewsCategory $category = null;
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
@@ -129,12 +130,12 @@ class News
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?NewsCategory
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): static
+    public function setCategory(NewsCategory $category): static
     {
         $this->category = $category;
         return $this;

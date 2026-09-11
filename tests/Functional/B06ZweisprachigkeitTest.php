@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\News;
+use App\Enum\NewsCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -38,7 +39,7 @@ final class B06ZweisprachigkeitTest extends WebTestCase
         $em->createQuery('DELETE FROM '.News::class)->execute();
         $n = new News();
         $n->setTitleLb('T')->setTitleEn('T EN')->setSummaryLb('s')->setSummaryEn('s')
-            ->setContentLb('c')->setContentEn('c')->setCategory('youth')
+            ->setContentLb('c')->setContentEn('c')->setCategory(NewsCategory::Youth)
             ->setSlug('mein-slug')->setPublishedAt(new \DateTimeImmutable('2026-01-01 10:00:00'));
         $em->persist($n);
         $em->flush();

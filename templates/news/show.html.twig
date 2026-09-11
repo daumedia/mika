@@ -13,7 +13,7 @@
                     {{ 'news.published'|trans }} {{ article.publishedAt|date('d.m.Y') }}
                 </time>
                 <span class="px-2.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider rounded-full bg-white/8 text-white/60">
-                    {{ ('home.themes.' ~ article.category ~ '.title')|trans }}
+                    {{ ('home.themes.' ~ article.category.value ~ '.title')|trans }}
                 </span>
             </div>
             <h1 class="font-display text-[1.85rem] sm:text-[2.5rem] font-bold text-white leading-tight">
