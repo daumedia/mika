@@ -31,7 +31,7 @@ Dienst, keine Pseudonymisierung — die Seiten sind statisch und nur lesend.
 
 ## Ebene 3 · Schnittstellen
 
-- [ ] **T01** · `src/Controller/LegalController.php` mit zwei Methoden `impressum()` und
+- [x] **T01** · `src/Controller/LegalController.php` mit zwei Methoden `impressum()` und
       `datenschutz()`, je zwei `#[Route]` (`_locale` lb/en, Namen `app_impressum(_en)`,
       `app_datenschutz(_en)`, gleiche Slugs `impressum`/`datenschutz`), rendert die
       jeweilige Seiten-Template. Kein `#[IsGranted]` (öffentlich über `access_control`).
@@ -44,24 +44,24 @@ Seitenzustände hier: die Rechtsseiten haben nur den **gefüllten** Zustand (sta
 Inhalt, kein Laden, kein leerer/Fehler-Zustand im Fachsinn) — Robustheit bei fehlender
 Sprachfassung deckt Ebene 5.
 
-- [ ] **T02** · `templates/legal/_layout.html.twig` (erbt `base.html.twig`): lesbarer
+- [x] **T02** · `templates/legal/_layout.html.twig` (erbt `base.html.twig`): lesbarer
       Prosa-Container (Textbreite, Fraunces-Überschriften, Figtree-Fließtext mit
       Design-Tokens), `{% block title %}` je Seite, und ein Baustein, der bei `_locale=en`
       den Hinweis „luxemburgische Fassung ist maßgeblich" einblendet (Übersetzungsschlüssel
       `legal.authoritative_note`). — `AK-06, AK-11`
-- [ ] **T03** `[P]` · `templates/legal/impressum.html.twig` (erbt `_layout`) plus
+- [x] **T03** `[P]` · `templates/legal/impressum.html.twig` (erbt `_layout`) plus
       `templates/legal/content/impressum.lb.html.twig` und `impressum.en.html.twig`:
       Betreiber-Name, Kontakt-E-Mail als `mailto`, Postanschrift, DP Kayl-Téiteng,
       Inhaltsverantwortung — **nur** diese freigegebenen Betreiber-Angaben, keine
       Dritt-Daten. Werte aus OF-01. Funktionstest prüft, dass die Pflichtangaben erscheinen.
       — `AK-07, AK-04, AK-12`
-- [ ] **T04** `[P]` · `templates/legal/datenschutz.html.twig` (erbt `_layout`) plus
+- [x] **T04** `[P]` · `templates/legal/datenschutz.html.twig` (erbt `_layout`) plus
       `templates/legal/content/datenschutz.lb.html.twig` und `datenschutz.en.html.twig`:
       Abschnitte gespiegelt aus `docs/datenschutz.md` — Verantwortlicher, keine Tracker /
       keine einwilligungspflichtigen Cookies, Server-/Zugriffslogs, Fehler-Tracking Sentry
       (EU), Hosting (OF-02), `mailto`-Kontakt (kein Formular), Betroffenenrechte + Beschwerde
       bei der **CNPD**. Kein Google-Fonts-/Newsletter-/Formular-Text. — `AK-08, AK-04`
-- [ ] **T05** `[P]` · `templates/base.html.twig`: (a) Footer-Zeile mit zwei Links
+- [x] **T05** `[P]` · `templates/base.html.twig`: (a) Footer-Zeile mit zwei Links
       „Impressum" · „Datenschutz" (Übersetzungsschlüssel `legal.impressum` /
       `legal.datenschutz`, `path()` auf die locale-passende Route) — erscheint auf jeder
       öffentlichen Seite; (b) die Sprachpillen-`route_map` in **beiden** Zweigen (LU/EN) und
@@ -73,7 +73,7 @@ Sprachfassung deckt Ebene 5.
 
 ## Ebene 5 · Feinschliff
 
-- [ ] **T06** · Randfälle + Barrierefreiheit: fehlende Sprachfassung eines
+- [x] **T06** · Randfälle + Barrierefreiheit: fehlende Sprachfassung eines
       Inhaltsbausteins fällt sauber auf LU zurück (kein 500, kein roher
       Übersetzungsschlüssel); Sprachpille auf einer Rechtsseite landet nachweislich auf der
       Gegenfassung, **nicht** auf der Startseite; unbekanntes Locale-Präfix verhält sich wie

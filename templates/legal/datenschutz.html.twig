@@ -1,0 +1,10 @@
+{% extends 'legal/_layout.html.twig' %}
+
+{% block title %}{{ 'legal.datenschutz'|trans }} — Mika Ferreira{% endblock %}
+
+{% block legal_heading %}{{ 'legal.datenschutz'|trans }}{% endblock %}
+
+{% block legal_content %}
+    {# Sprachfassung nach Locale; fehlt sie, greift die luxemburgische (EC-02). #}
+    {% include ['legal/content/datenschutz.' ~ app.request.locale ~ '.html.twig', 'legal/content/datenschutz.lb.html.twig'] %}
+{% endblock %}

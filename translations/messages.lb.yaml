@@ -106,3 +106,10 @@ contact.flash_success: Merci fir Är Noriicht! Ech melle mech bei Iech.
 footer.text: "Mika (Michael) Ferreira · DP Kayl-Téiteng · email@michael-ferreira.com"
 footer.party: Demokratesch Partei · Kayl-Téiteng
 footer.copyright: "© %year% Mika Ferreira. All Rechter virbehal."
+
+# Legal (Feature 01)
+legal.impressum: Impressum
+legal.datenschutz: Dateschutz
+legal.authoritative_note: >
+    Am Fall vun Ënnerscheeder ass déi lëtzebuergesch Fassung vun dësem Text rechtlech
+    verbindlech.
