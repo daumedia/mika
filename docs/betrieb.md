@@ -56,8 +56,10 @@ Coolifys Let's-Encrypt erneuert zwar automatisch, die Warnung ist das Sicherheit
 
 ## Noch nicht angefasst (bewusst)
 
-- **Content-Security-Policy — per Env umschaltbar.** Eine strikte CSP (`…'self'`) liegt im
-  `SecurityHeadersSubscriber`. Der Modus hängt an der Env **`CSP_ENFORCE`**:
+- **Content-Security-Policy — ✅ erzwingend in Produktion (2026-09-11).** Eine strikte CSP
+  (`script-src 'self'`; `style-src 'self' 'unsafe-inline'` wegen Turbos Fortschrittsleiste)
+  liegt im `SecurityHeadersSubscriber`. In Prod erzwingend über `.env.prod` (`CSP_ENFORCE=1`),
+  in Dev Report-Only. Der Modus hängt an der Env **`CSP_ENFORCE`**:
   - `0` (Standard): `Content-Security-Policy-Report-Only` — blockiert nichts, meldet nur an
     `/csp-report` (`CspReportController`) → Log-Zeile „CSP violation" (Prod: Container-/stderr-Log).
   - `1`: `Content-Security-Policy` — erzwingend.
