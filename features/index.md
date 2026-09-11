@@ -23,7 +23,7 @@ Eigener ID-Namensraum (`01`, `02`, …) — vor dem Code spezifiziert, im Unters
 
 | ID | Feature | Prio | Status | Abhängig von | Zuletzt |
 |---|---|---|---|---|---|
-| 01 | Rechtstexte (Impressum & Datenschutzerklärung) | P1 | tasked | B06 | 2026-09-11 · `tasks.md` geschrieben (`/sdd-tasks`); nächster Schritt `/sdd-build 01` |
+| 01 | Rechtstexte (Impressum & Datenschutzerklärung) | P1 | approved | B06 | 2026-09-11 · QA **production-ready: ja** (BF-13 behoben; OF-01/02 eingesetzt). Nächster Schritt `/sdd-deploy 01` |
 
 ## Wo die Features im Code leben
 

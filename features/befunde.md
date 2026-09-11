@@ -26,6 +26,7 @@ Auditberichts, den `/sdd-erfassen abschluss` daraus baut.
 | BF-03 | B01 | `/logout` per GET ohne CSRF | niedrig | 2026-09-10 | noch nicht (nur behoben) |
 | BF-04 | B02 | Doppelter Slug → HTTP 500 statt Feldfehler | mittel | 2026-09-10 | noch nicht (nur behoben, `UniqueEntity`) |
 | BF-08 | B03 | Geplanter Beitrag über Direkt-URL abrufbar | mittel | 2026-09-10 | noch nicht (nur behoben, Datumsfilter in `show()`) |
+| BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | noch nicht (behoben in `feature/01-rechtstexte`, wartet auf `/sdd-deploy 01`) |
 
 ## Akzeptiert
 
@@ -49,5 +50,12 @@ Stand nach allen sechs geprüften Features:
   `access_control ^/admin` (B01). Ohne zweite Schicht (kein RLS) rächt sich jede vergessene
   Prüfung sofort — bei BF-08 bestätigt und geschlossen.
 - **Härtung des Betriebs** — Login-Throttling fehlte (BF-01, **behoben**), CSP fehlt noch
-  (BF-07 Inline-Script), Google Fonts hotlinked (IP-Abfluss), doppelte Asset-Pipeline,
-  `APP_ENV=dev` committet. Der offene Rest gehört gebündelt in `sdd-betrieb`.
+  (BF-07 Inline-Script), Google Fonts hotlinked (IP-Abfluss, **in sdd-betrieb behoben**:
+  lokal), `APP_ENV=dev` committet (**behoben**). Der offene Rest gehört in `sdd-betrieb`.
+- **Doppelte Asset-Pipeline (Encore + AssetMapper) — jetzt mit belegtem Schaden.** Der in
+  `app-shell.md` notierte Fehlbestand ist nicht mehr nur kosmetisch: Die AssetMapper-Hälfte
+  (`importmap('app')`) lädt einen `es-module-shims`-Polyfill von `ga.jspm.io` und überträgt
+  die Besucher-IP an ein Dritt-CDN — auf jeder Seite (BF-13, hoch). Erst ein konkretes
+  Kriterium (Feature 01, AK-09 „keine externen Dienste") hat den latenten Abfluss sichtbar
+  gemacht. Fix: die redundante `importmap('app')`-Zeile entfernen (Encore lädt alles) oder
+  `es-module-shims` lokal einbinden.

@@ -1,0 +1,10 @@
+{% extends 'legal/_layout.html.twig' %}
+
+{% block title %}{{ 'legal.impressum'|trans }} — Mika Ferreira{% endblock %}
+
+{% block legal_heading %}{{ 'legal.impressum'|trans }}{% endblock %}
+
+{% block legal_content %}
+    {# Sprachfassung nach Locale; fehlt sie, greift die luxemburgische (EC-02). #}
+    {% include ['legal/content/impressum.' ~ app.request.locale ~ '.html.twig', 'legal/content/impressum.lb.html.twig'] %}
+{% endblock %}

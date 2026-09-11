@@ -105,3 +105,10 @@ contact.flash_success: Thank you for your message! I will get back to you.
 footer.text: "Mika (Michael) Ferreira · DP Kayl-Téiteng · email@michael-ferreira.com"
 footer.party: Democratic Party · Kayl-Téiteng
 footer.copyright: "© %year% Mika Ferreira. All rights reserved."
+
+# Legal (Feature 01)
+legal.impressum: Imprint
+legal.datenschutz: Privacy
+legal.authoritative_note: >
+    In case of discrepancies, the Luxembourgish version of this text is legally
+    authoritative.

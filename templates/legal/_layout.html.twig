@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{# Gemeinsames Layout der Rechtsseiten: lesbarer Prosa-Container, Titelblock und der
+   Verbindlichkeitshinweis, der nur in der englischen Fassung erscheint (AK-06). #}
+
+{% block body %}
+    <section class="pt-28 sm:pt-32 pb-20">
+        <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-navy mb-8">
+                {% block legal_heading %}{% endblock %}
+            </h1>
+
+            {% if app.request.locale == 'en' %}
+                <p class="mb-8 rounded-lg border border-cream-dark bg-cream-dark/40 px-4 py-3 text-sm text-text-muted">
+                    {{ 'legal.authoritative_note'|trans }}
+                </p>
+            {% endif %}
+
+            <div class="legal-prose">
+                {% block legal_content %}{% endblock %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

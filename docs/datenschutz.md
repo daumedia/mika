@@ -22,13 +22,13 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 
 | Dienst | Rolle | Region | AV-Vertrag | Status |
 |---|---|---|---|---|
-| Hosting (Coolify-Server) | Betrieb App + DB | **prüfen** (sollte EU sein) | **offen** — beim Anbieter abschließen/ablegen | ⏳ |
+| Hosting — **Hostinger** (Hostinger Operations UAB) | Betrieb App + DB | ✅ **DE (EU)** bestätigt — Rechenzentrum Düsseldorf (IP-Geolokalisierung 2026-09-11) | **offen** — AV-Vertrag/DPA bei Hostinger abschließen und ablegen | ✅ aktiv |
 | Sentry | Fehler-Tracking | ✅ EU (Frankfurt) bestätigt | ✅ DPA bestätigt 2026-09-11 | ✅ aktiv seit 2026-09-11 |
 
 ## Drittlandübermittlung
 
-Sentry-Region **EU** (Frankfurt) bestätigt. Keine Drittlandübermittlung, sofern auch das
-**Hosting EU** ist — das bleibt oben als offener Punkt markiert.
+**Keine Drittlandübermittlung.** Sentry-Region **EU** (Frankfurt) und Hosting bei
+**Hostinger in Deutschland (EU)** sind beide bestätigt.
 
 ## Gelöst
 
@@ -40,6 +40,7 @@ Sentry-Region **EU** (Frankfurt) bestätigt. Keine Drittlandübermittlung, sofer
 - **Impressum + Datenschutzerklärung** veröffentlicht? Für eine öffentliche Wahlkampfseite
   in LU erwartet. Existenz/Fassung prüfen und hier mit Datum vermerken. (Inhalt = Aufgabe
   des Betreibers, ggf. mit fachlichem Rat.)
-- **Hosting-AV-Vertrag** abschließen und Ablageort notieren.
+- **Hosting-AV-Vertrag/DPA bei Hostinger** abschließen und Ablageort notieren (Region DE/EU
+  ist bestätigt).
 - ~~Sentry-DPA + EU-Region~~ ✅ erledigt 2026-09-11 (EU bestätigt, DPA bestätigt).
 - **Server-Log-Aufbewahrung** beim Hoster prüfen und kurz halten.
