@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@symfony/stimulus-bridge": "^4.0.1",
-    "@symfony/ux-turbo": "^2.33.0"
+    "@symfony/ux-turbo": "^2.33.0",
+    "core-js": "^3.50.0"
   }
 }

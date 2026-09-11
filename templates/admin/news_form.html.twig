@@ -25,21 +25,21 @@
     <section class="py-20 bg-cream">
         <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
             <div class="bg-white rounded-2xl border border-cream-dark/50 p-7 sm:p-10 -mt-12 relative z-20">
-                {{ form_start(form, {attr: {class: 'space-y-7'}}) }}
+                {{ form_start(form, {attr: {class: 'space-y-7', 'data-controller': 'news-form'}}) }}
 
                     {# Language Tabs #}
                     <div>
                         <div class="admin-tabs" role="tablist">
-                            <button type="button" class="admin-tab active" role="tab" aria-selected="true" data-tab="lb" onclick="switchTab('lb')">
+                            <button type="button" class="admin-tab active" role="tab" aria-selected="true" data-tab="lb" data-news-form-target="tab" data-action="news-form#switchTab">
                                 Lëtzebuergesch
                             </button>
-                            <button type="button" class="admin-tab" role="tab" aria-selected="false" data-tab="en" onclick="switchTab('en')">
+                            <button type="button" class="admin-tab" role="tab" aria-selected="false" data-tab="en" data-news-form-target="tab" data-action="news-form#switchTab">
                                 English
                             </button>
                         </div>
 
                         {# Tab: Lëtzebuergesch #}
-                        <div class="admin-tab-panel" data-tab-panel="lb">
+                        <div class="admin-tab-panel" data-tab-panel="lb" data-news-form-target="panel">
                             <div class="space-y-5">
                                 <div>
                                     {{ form_label(form.titleLb, null, {label_attr: {class: 'form-label'}}) }}
@@ -60,11 +60,11 @@
                         </div>
 
                         {# Tab: English #}
-                        <div class="admin-tab-panel hidden" data-tab-panel="en">
+                        <div class="admin-tab-panel hidden" data-tab-panel="en" data-news-form-target="panel">
                             <div class="space-y-5">
                                 <div>
                                     {{ form_label(form.titleEn, null, {label_attr: {class: 'form-label'}}) }}
-                                    {{ form_widget(form.titleEn, {attr: {class: 'form-input'}}) }}
+                                    {{ form_widget(form.titleEn, {attr: {class: 'form-input', 'data-news-form-target': 'title', 'data-action': 'input->news-form#generateSlug'}}) }}
                                     {{ form_errors(form.titleEn, {attr: {class: 'mt-1 text-sm text-red-600'}}) }}
                                 </div>
                                 <div>
@@ -92,7 +92,7 @@
                             </div>
                             <div>
                                 {{ form_label(form.slug, null, {label_attr: {class: 'form-label'}}) }}
-                                {{ form_widget(form.slug, {attr: {class: 'form-input'}}) }}
+                                {{ form_widget(form.slug, {attr: {class: 'form-input', 'data-news-form-target': 'slug', 'data-action': 'input->news-form#markManual'}}) }}
                                 {{ form_errors(form.slug, {attr: {class: 'mt-1 text-sm text-red-600'}}) }}
                             </div>
                             <div>
@@ -114,49 +114,5 @@
             </div>
         </div>
     </section>
-
-    <script>
-        function switchTab(lang) {
-            document.querySelectorAll('.admin-tab').forEach(function(tab) {
-                var isActive = tab.dataset.tab === lang;
-                tab.classList.toggle('active', isActive);
-                tab.setAttribute('aria-selected', isActive);
-            });
-            document.querySelectorAll('.admin-tab-panel').forEach(function(panel) {
-                panel.classList.toggle('hidden', panel.dataset.tabPanel !== lang);
-            });
-        }
-
-        // Auto-generate slug from English title
-        (function() {
-            var titleEn = document.getElementById('{{ form.titleEn.vars.id }}');
-            var slug = document.getElementById('{{ form.slug.vars.id }}');
-            if (!titleEn || !slug) return;
-
-            var manualEdit = slug.value !== '';
-
-            slug.addEventListener('input', function() {
-                manualEdit = true;
-            });
-
-            titleEn.addEventListener('input', function() {
-                if (manualEdit) return;
-                slug.value = titleEn.value
-                    .toLowerCase()
-                    .trim()
-                    .replace(/[àáâãäå]/g, 'a')
-                    .replace(/[èéêë]/g, 'e')
-                    .replace(/[ìíîï]/g, 'i')
-                    .replace(/[òóôõö]/g, 'o')
-                    .replace(/[ùúûü]/g, 'u')
-                    .replace(/[ñ]/g, 'n')
-                    .replace(/[ç]/g, 'c')
-                    .replace(/[^a-z0-9\s-]/g, '')
-                    .replace(/[\s]+/g, '-')
-                    .replace(/-+/g, '-')
-                    .replace(/^-|-$/g, '');
-            });
-        })();
-    </script>
 
 {% endblock %}

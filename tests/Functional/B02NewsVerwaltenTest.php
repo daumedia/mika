@@ -52,6 +52,35 @@ final class B02NewsVerwaltenTest extends WebTestCase
         $this->em->flush();
     }
 
+    /**
+     * BF-07 · Das News-Formular nutzt einen Stimulus-Controller statt Inline-JS
+     * (Voraussetzung fuer eine strikte CSP: kein Inline-<script>, kein onclick).
+     */
+    public function testBF07_news_form_uses_stimulus_no_inline_js(): void
+    {
+        $this->client->request('GET', '/admin/news/create');
+        $this->assertResponseIsSuccessful();
+
+        $html = (string) $this->client->getResponse()->getContent();
+        $this->assertStringNotContainsString('onclick=', $html);
+        $this->assertStringNotContainsString('function switchTab', $html);
+        $this->assertStringContainsString('data-controller="news-form"', $html);
+        $this->assertStringContainsString('data-news-form-target="slug"', $html);
+        $this->assertStringContainsString('news-form#switchTab', $html);
+    }
+
+    /** BF-07 · Loesch-Bestaetigung ueber Stimulus statt onsubmit="confirm(...)". */
+    public function testBF07_dashboard_delete_uses_confirm_controller(): void
+    {
+        $this->makeNews('x-slug', 'X', '2026-01-01 10:00:00');
+        $this->client->request('GET', '/admin');
+        $this->assertResponseIsSuccessful();
+
+        $html = (string) $this->client->getResponse()->getContent();
+        $this->assertStringNotContainsString('onsubmit=', $html);
+        $this->assertStringContainsString('submit->confirm#check', $html);
+    }
+
     public function testAK01_dashboard_lists_all_including_future_dated(): void
     {
         $this->makeNews('past-a', 'Vergangener Beitrag', '2020-01-01 10:00:00');

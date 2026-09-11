@@ -81,7 +81,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                 </svg>
                                             </a>
-                                            <form method="post" action="{{ path('app_admin_news_delete', {id: article.id}) }}" onsubmit="return confirm('Dësen Artikel wierklech läschen?')">
+                                            <form method="post" action="{{ path('app_admin_news_delete', {id: article.id}) }}" data-controller="confirm" data-action="submit->confirm#check" data-confirm-message-value="Dësen Artikel wierklech läschen?">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ article.id) }}">
                                                 <button type="submit" class="text-red-400 hover:text-red-600 transition-colors" title="Läschen">
                                                     <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
