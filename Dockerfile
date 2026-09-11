@@ -162,24 +162,17 @@ RUN set -eux; \
 # erst zur Laufzeit auf — die echten Werte kommen aus Coolify. Kein Schritt
 # verbindet sich mit der Datenbank.
 #
-#   importmap:install  – lädt die Vendor-JS (Stimulus/Turbo) nach assets/vendor/;
-#                        gitignored, auf dem Coolify-Build sonst nicht vorhanden.
-#   tailwind:build     – ⚠ Pflicht VOR asset-map:compile: das
-#                        symfonycasts/tailwind-bundle lädt sein Tailwind-Binary
-#                        (v4.1.11, siehe config/packages/symfonycasts_tailwind.yaml)
-#                        und kompiliert assets/styles/app.css. Ohne diesen Schritt
-#                        bricht asset-map:compile mit „Built Tailwind CSS file does
-#                        not exist" ab.
-#   asset-map:compile  – dumpt public/assets/, damit `importmap('app')` aus
-#                        base.html.twig zur Laufzeit nicht ins Leere läuft.
-#   assets:install     – legt public/bundles/ an (Bundle-Assets).
-#   cache:warmup       – kompiliert den prod-Container, damit der erste echte
-#                        Besucher nicht darauf wartet.
+# Assets kommen ausschließlich aus Webpack Encore (assets-Stage → public/build).
+# Die AssetMapper-Schritte (importmap:install / tailwind:build / asset-map:compile) sind
+# entfallen (OF-05, nach BF-13): `importmap('app')` wurde aus base.html.twig entfernt,
+# nichts referenziert mehr public/assets/ — die ausgelieferte Seite nutzt nur /build/
+# (Encore) und /images/ (direkt).
+#
+#   assets:install – legt public/bundles/ an (Bundle-Assets).
+#   cache:warmup   – kompiliert den prod-Container, damit der erste echte Besucher
+#                    nicht darauf wartet.
 RUN set -eux; \
     export APP_SECRET=build-only; \
-    php bin/console importmap:install --no-interaction; \
-    php bin/console tailwind:build --minify --no-interaction; \
-    php bin/console asset-map:compile --no-interaction; \
     php bin/console assets:install public --no-interaction; \
     php bin/console cache:warmup --no-interaction; \
     chown -R www-data:www-data var
