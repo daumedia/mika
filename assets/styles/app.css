@@ -518,6 +518,8 @@ body::after {
     50% { transform: translateY(6px); opacity: 0.8; }
 }
 
+.scroll-pulse { animation: scrollPulse 2s ease-in-out infinite; }
+
 .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .fade-up-delay-1 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
 .fade-up-delay-2 { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }

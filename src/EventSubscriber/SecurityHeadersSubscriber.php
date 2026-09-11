@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -9,21 +10,23 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Setzt Sicherheits-Header auf jede Antwort.
  *
- * Die Content-Security-Policy läuft zunächst im **Report-Only**-Modus: Der Browser
- * blockiert nichts, meldet Verstöße aber an /csp-report (siehe CspReportController) und in
- * die Entwickler-Konsole. So lässt sich gefahrlos sammeln, was eine erzwingende CSP bräuchte,
- * bevor sie scharf geschaltet wird. Bekannte offene Punkte für die scharfe Fassung:
- * das Inline-<script> und die Inline-Handler im Admin-News-Formular (BF-07) sowie eine
- * Inline-`style`-Animation auf der Startseite.
+ * Die Content-Security-Policy ist strikt (ausschließlich eigene Herkunft). Der Modus wird
+ * über die Env `CSP_ENFORCE` umgeschaltet:
+ *   - 0 (Standard): `Content-Security-Policy-Report-Only` — blockiert nichts, meldet nur an
+ *     /csp-report (siehe CspReportController).
+ *   - 1: `Content-Security-Policy` — erzwingend.
+ *
+ * So lässt sich in Coolify scharfschalten und bei einem Problem sofort ohne Code-Deploy
+ * zurückschalten. Vorher gehören die Verstöße im Log auf null (die bekannten — Admin-Inline-JS
+ * BF-07, Startseiten-Inline-Style — sind behoben).
  */
 class SecurityHeadersSubscriber implements EventSubscriberInterface
 {
     /**
-     * Ziel-Policy (strikt, ausschließlich eigene Herkunft). Alles Externe würde gemeldet;
-     * die Seite lädt JS/CSS aus /build (Encore), Schriften aus /fonts, Bilder aus /images
-     * und das Favicon als data:-URI — alles `'self'` bzw. `data:`.
+     * Ziel-Policy (strikt). Die Seite lädt JS/CSS aus /build (Encore), Schriften aus /fonts,
+     * Bilder aus /images und das Favicon als data:-URI — alles `'self'` bzw. `data:`.
      */
-    private const CSP_REPORT_ONLY =
+    private const CSP_POLICY =
         "default-src 'self'; "
         ."base-uri 'self'; "
         ."object-src 'none'; "
@@ -35,6 +38,12 @@ class SecurityHeadersSubscriber implements EventSubscriberInterface
         ."font-src 'self'; "
         ."connect-src 'self'; "
         .'report-uri /csp-report';
+
+    public function __construct(
+        #[Autowire('%env(bool:CSP_ENFORCE)%')]
+        private readonly bool $enforceCsp = false,
+    ) {
+    }
 
     public function onKernelResponse(ResponseEvent $event): void
     {
@@ -49,8 +58,10 @@ class SecurityHeadersSubscriber implements EventSubscriberInterface
         $headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         $headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=(), browsing-topics=()');
 
-        // Vorerst nur beobachtend — bricht nichts, sammelt aber Verstöße.
-        $headers->set('Content-Security-Policy-Report-Only', self::CSP_REPORT_ONLY);
+        $headers->set(
+            $this->enforceCsp ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only',
+            self::CSP_POLICY,
+        );
 
         // HSTS nur über HTTPS senden (nach dem Trusted-Proxy-Setup erkennt Symfony
         // das korrekt). Über http würde der Browser den Header ohnehin ignorieren.
