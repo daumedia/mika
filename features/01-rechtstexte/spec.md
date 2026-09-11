@@ -122,11 +122,12 @@ nur-lesbare Seiten ohne Eingaben.
 - **OF-04** · EN-Slugs (`imprint`/`privacy`) gegenüber gleichen Slugs (`impressum`/
   `datenschutz`) in beiden Sprachen — Detail für `sdd-architektur`.
 - **OF-05** · (beim BF-13-Fix aufgefallen) Nach dem Entfernen von `importmap('app')` ist die
-  AssetMapper-Hälfte der doppelten Pipeline **ungenutzt**: die Dockerfile-Schritte
-  `importmap:install` / `tailwind:build` / `asset-map:compile` erzeugen nur noch ungenutztes
-  `public/assets/`, und `symfony/asset-mapper` + `importmap.php` + `asset_mapper.yaml` sind
-  entbehrlich. Kein Leck, nur Ballast — gehört in eine eigene Aufräum-Aktion (projektweit,
-  nicht dieses Feature). Entscheidet: Betreiber.
+  AssetMapper-Hälfte der doppelten Pipeline **ungenutzt**. **Dockerfile-seitig erledigt
+  (2026-09-11):** die Schritte `importmap:install` / `tailwind:build` / `asset-map:compile`
+  wurden entfernt (verifiziert: Seite nutzt nur `/build/` + `/images/`, kein `/assets/`).
+  **Optional verbleibend:** `symfony/asset-mapper` + `symfonycasts/tailwind-bundle` +
+  `importmap.php` + `asset_mapper.yaml` aus dem Projekt entfernen (Composer-Ebene) — kein
+  Leck, nur Ballast. Entscheidet: Betreiber.
 
 ## Decision Log
 
