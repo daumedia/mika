@@ -33,7 +33,10 @@ class SecurityHeadersSubscriber implements EventSubscriberInterface
         ."frame-ancestors 'none'; "
         ."form-action 'self'; "
         ."script-src 'self'; "
-        ."style-src 'self'; "
+        // 'unsafe-inline' nur für Styles: Turbo (Hotwired) spritzt seine Fortschrittsleiste
+        // als Inline-<style> ein. Inline-Styles können kein JS ausführen — die XSS-Schranke
+        // ist script-src 'self' (bleibt strikt).
+        ."style-src 'self' 'unsafe-inline'; "
         ."img-src 'self' data:; "
         ."font-src 'self'; "
         ."connect-src 'self'; "
