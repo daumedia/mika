@@ -2,9 +2,11 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
+        # Fallback, falls DATABASE_URL kein serverVersion trägt. ⚠ Das serverVersion aus
+        # der DATABASE_URL übersteuert diesen Wert — dort MUSS es „8.0.0" (mit Patch-Stelle)
+        # heissen, nicht „8.0": DBAL 4 feuert sonst „Support for MySQL < 8", weil
+        # version_compare('8.0','8.0.0','>=') = false ist.
+        server_version: '8.0.0'
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
