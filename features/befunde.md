@@ -26,7 +26,7 @@ Auditberichts, den `/sdd-erfassen abschluss` daraus baut.
 | BF-03 | B01 | `/logout` per GET ohne CSRF | niedrig | 2026-09-10 | noch nicht (nur behoben) |
 | BF-04 | B02 | Doppelter Slug → HTTP 500 statt Feldfehler | mittel | 2026-09-10 | noch nicht (nur behoben, `UniqueEntity`) |
 | BF-08 | B03 | Geplanter Beitrag über Direkt-URL abrufbar | mittel | 2026-09-10 | noch nicht (nur behoben, Datumsfilter in `show()`) |
-| BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | noch nicht (behoben in `feature/01-rechtstexte`, wartet auf `/sdd-deploy 01`) |
+| BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | **2026-09-11 (deployt)** — `jspm.io` site-weit aus dem Prod-HTML verschwunden |
 
 ## Akzeptiert
 
