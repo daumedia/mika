@@ -16,8 +16,12 @@ Eingerichtet über `sdd-betrieb`. Was hier steht, ist der Betriebszustand — ni
 | Schriften lokal | ✅ Fraunces + Figtree aus `public/fonts/` (keine Besucher-IP an Google) | `assets/styles/app.css`, `templates/base.html.twig` |
 | Fehler-Tracking | ⏳ Code verdrahtet, **inaktiv** bis `SENTRY_DSN` gesetzt | `config/packages/sentry.yaml` |
 | Health-Endpunkt | ✅ `/health` → `ok` | `src/Controller/HealthController.php` |
-| Uptime-Überwachung | ⏳ offen — Account + Monitor anlegen | siehe unten |
+| Uptime-Überwachung | 🟡 Monitor live (Uptime Kuma, **separater Server**, `/health`, Keyword `ok`); Alarm-Kanal noch offen | siehe unten |
 | DB-Sicherung | ⏳ offen — in Coolify aktivieren | siehe unten |
+
+**Live-verifiziert am 2026-09-11** (nach Deploy auf `master`): Security-Header inkl. HSTS
+gesetzt, `X-Powered-By` weg, `/admin`-Redirect nun `https://`, Google-Fonts-Link entfernt,
+6 lokale `/fonts/*.woff2` im CSS, Kernrouten 200. Sentry bootet inert (kein DSN).
 
 ## Offene Hand-off-Schritte (brauchen dein Konto / die Coolify-Oberfläche)
 
