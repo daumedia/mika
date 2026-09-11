@@ -56,10 +56,15 @@ Coolifys Let's-Encrypt erneuert zwar automatisch, die Warnung ist das Sicherheit
 
 ## Noch nicht angefasst (bewusst)
 
-- **Content-Security-Policy (erzwingend).** Blockiert durch die doppelte Asset-Pipeline
-  (Encore + AssetMapper mit Inline-importmap-Script) und das Inline-`<script>` im
-  News-Formular (BF-07). Eine strikte CSP braucht dort Nonces und würde die Seite sonst
-  zerlegen. Gehört an die Bereinigung der Asset-Pipeline gekoppelt — eigener Schritt.
+- **Content-Security-Policy — jetzt im Report-Only-Modus.** Eine strikte CSP (`…'self'`)
+  läuft als `Content-Security-Policy-Report-Only` (`SecurityHeadersSubscriber`) und blockiert
+  nichts; Verstöße gehen an `/csp-report` (`CspReportController`) und landen im Log (Prod:
+  Container-/stderr-Log, Meldung „CSP violation"). Vor dem **Scharfschalten** zu beheben:
+  das Inline-`<script>` und die `onclick`/`onsubmit`-Handler im Admin-News-Formular (BF-07)
+  sowie eine Inline-`style`-Animation auf der Startseite (`home/index.html.twig`). Die
+  doppelte Asset-Pipeline ist bereits weg (OF-05), daher ist der Inline-`importmap`-Blocker
+  entfallen. Regelmäßig die „CSP violation"-Logzeilen sichten; wenn nur noch die bekannten
+  Punkte auftauchen und behoben sind, `-Report-Only` streichen → dann erzwingt sie.
 - **Niedrige QA-Befunde** BF-05, 06, 09–12 (`features/befunde.md`) — Aufräum-Feature,
   kein Betriebsthema.
 
