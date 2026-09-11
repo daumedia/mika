@@ -5,6 +5,14 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    # Hinter Coolifys Reverse-Proxy: dem unmittelbaren Verbindungs-IP (dem Proxy)
+    # vertrauen und die X-Forwarded-*-Header lesen. Ohne das erkennt Symfony HTTPS
+    # nicht und erzeugt absolute URLs (z. B. den Login-Redirect) als http://.
+    # Der Container ist ausschließlich über den Proxy erreichbar, daher ist
+    # REMOTE_ADDR hier sicher.
+    trusted_proxies: '127.0.0.1,REMOTE_ADDR'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port']
+
     #esi: true
     #fragments: true
 

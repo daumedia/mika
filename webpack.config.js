@@ -24,6 +24,16 @@ Encore
 
     .enableStimulusBridge('./assets/controllers.json')
 
+    // Root-absolute url() in Empfehlung (z. B. die @font-face auf /fonts/…woff2)
+    // NICHT von css-loader auflösen lassen — die Dateien liegen unter public/fonts/
+    // und werden vom Webserver ausgeliefert, nicht von Webpack gebündelt. Ohne
+    // diesen Filter bricht der Build mit „Module not found: /fonts/…" ab.
+    .configureCssLoader((options) => {
+        options.url = {
+            filter: (url) => !url.startsWith('/'),
+        };
+    })
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
