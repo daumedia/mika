@@ -37,9 +37,9 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 
 ## Offene Punkte
 
-- **Impressum + Datenschutzerklärung** veröffentlicht? Für eine öffentliche Wahlkampfseite
-  in LU erwartet. Existenz/Fassung prüfen und hier mit Datum vermerken. (Inhalt = Aufgabe
-  des Betreibers, ggf. mit fachlichem Rat.)
+- ~~Impressum + Datenschutzerklärung veröffentlicht + fachlich geprüft~~ ✅ erledigt
+  2026-09-11 (Feature 01 live unter `/impressum` und `/datenschutz`; Texte vom Betreiber
+  fachlich abgesegnet, OF-03).
 - **Hosting-AV-Vertrag/DPA bei Hostinger** abschließen und Ablageort notieren (Region DE/EU
   ist bestätigt).
 - ~~Sentry-DPA + EU-Region~~ ✅ erledigt 2026-09-11 (EU bestätigt, DPA bestätigt).

@@ -117,8 +117,8 @@ nur-lesbare Seiten ohne Eingaben.
 - **OF-02** · Endgültiger Hosting-Anbieter und Datenregion (EU?) müssen feststehen, damit die
   Datenschutzerklärung das Hosting korrekt benennt — hängt an PRD OF-01 und dem offenen Punkt
   in `docs/datenschutz.md`. Entscheidet: Betreiber, vor Veröffentlichung.
-- **OF-03** · Prüfung der finalen Texte durch eine Fachperson/CNPD-Abgleich (empfohlen, da
-  dieses Feature keine Rechtsberatung leistet). Entscheidet: Betreiber.
+- **OF-03** · ✅ erledigt (2026-09-11) — die finalen Texte sind vom Betreiber fachlich
+  geprüft/abgesegnet.
 - **OF-04** · EN-Slugs (`imprint`/`privacy`) gegenüber gleichen Slugs (`impressum`/
   `datenschutz`) in beiden Sprachen — Detail für `sdd-architektur`.
 - **OF-05** · ✅ **erledigt (2026-09-11).** Die doppelte Asset-Pipeline ist bereinigt — das
