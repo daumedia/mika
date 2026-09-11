@@ -2,19 +2,19 @@
 
 Stand: 2026-09-11 · Stack-Profil: `symfony-doctrine` · Artefaktpfad: `docs/`
 
-Bestandsinventar, rückwärts aus dem Code erfasst (`sdd-erfassen`). Phase 1 (Kartierung)
-und Phase 2 (Rückerfassung) sind **abgeschlossen**: jedes Feature hat `spec.md` und
-`design.md`, alle stehen auf `rekonstruiert`. IDs mit `B`-Präfix. Nächster Schritt ist die
-QA je Feature (`/sdd-qa BNN`), danach der Auditbericht (`/sdd-erfassen abschluss`).
+Bestandsinventar, rückwärts aus dem Code erfasst (`sdd-erfassen`). Rückerfassung, QA und
+Auslieferung sind durchlaufen: jedes Feature hat `spec.md` und `design.md`, wurde gegen
+seine Akzeptanzkriterien geprüft und ist live — **alle Bestandsfeatures stehen auf
+`deployed`**, kein offener Befund (s. `befunde.md`). IDs mit `B`-Präfix.
 
 | ID | Feature | Prio | Status | Abhängig von | Zuletzt |
 |---|---|---|---|---|---|
 | B01 | Admin-Login | P0 | deployed | — | 2026-09-11 · live auf michael-ferreira.com; Throttling + Fixture-Schutz auf Prod verifiziert |
 | B02 | Neuigkeiten verwalten | P0 | deployed | B01 | 2026-09-11 · live (Erstauslieferung Coolify); Slug-Fix im ausgelieferten Stand |
 | B03 | Neuigkeiten lesen | P0 | deployed | B02 | 2026-09-11 · live; öffentliche News-Wege auf Prod 200 |
-| B04 | Startseite | P0 | review | B03, B06 | 2026-09-10 · QA: production-ready, 1 niedrig (Code live im Monolithen; Befund → sdd-betrieb) |
-| B05 | Kontaktseite | P1 | review | B06 | 2026-09-10 · QA: production-ready, 1 niedrig (Code live im Monolithen; Befund → sdd-betrieb) |
-| B06 | Zweisprachigkeit (LB/EN) | P0 | review | — | 2026-09-10 · QA: production-ready, 1 niedrig (Code live im Monolithen; Befund → sdd-betrieb) |
+| B04 | Startseite | P0 | deployed | B03, B06 | 2026-09-11 · live auf michael-ferreira.com; BF-10 (`\|raw`) behoben, kein offener Befund |
+| B05 | Kontaktseite | P1 | deployed | B06 | 2026-09-11 · live auf michael-ferreira.com; BF-11 (`ContactType` toter Code) gelöscht, kein offener Befund |
+| B06 | Zweisprachigkeit (LB/EN) | P0 | deployed | — | 2026-09-11 · live auf michael-ferreira.com; BF-12 (`hreflang`) ergänzt, kein offener Befund |
 
 ## Neue Features (durch die Kette)
 
@@ -69,12 +69,12 @@ Alle sechs Features sind geprüft (funktionale Tests + Angriffsdurchlauf, 40 Tes
 | B01 Admin-Login | approved | Login-Throttling, Fixture-Passwort, Logout-CSRF | — |
 | B02 News verwalten | approved | Slug `UniqueEntity` (500 → Feldfehler) | category-DB, Voter, Inline-JS |
 | B03 News lesen | approved | Datumsfilter in `show()` (Vorab-Leck) | Paginierung |
-| B04 Startseite | review | — (nur niedrig) | `\|raw` auf Übersetzungen |
-| B05 Kontaktseite | review | — (nur niedrig) | `ContactType` toter Code |
-| B06 Zweisprachigkeit | review | — (nur niedrig) | kein `hreflang` |
+| B04 Startseite | deployed | BF-10 `\|raw` entfernt | — |
+| B05 Kontaktseite | deployed | BF-11 toter `ContactType` gelöscht | — |
+| B06 Zweisprachigkeit | deployed | BF-12 `hreflang` ergänzt | — |
 
-B04–B06 bleiben `review` (Bestandsfeatures mit nur niedrigen Befunden; sie sind
-production-ready, wurden aber nicht ausgeliefert). Details in den `qa-report.md` und in
+B04–B06 sind seit 2026-09-11 `deployed`: ihre niedrigen Befunde (BF-10/11/12) wurden
+behoben und live verifiziert — kein offener Befund. Details in den `qa-report.md` und in
 `befunde.md`.
 
 **Systemweite Änderung:** neue Abhängigkeit `symfony/rate-limiter` (für Login-Throttling).
@@ -88,8 +88,9 @@ gehören in `sdd-betrieb`.
 Erste Auslieferung des Projekts auf **Coolify** (Dockerfile, Deploy-Branch `master`),
 live unter **https://michael-ferreira.com**. Da es ein Monolith ist, ging die ganze Seite
 auf einmal live; B01–B03 (`approved`) tragen die Sicherheitsfixes und sind auf
-`deployed` gesetzt. B04–B06 bleiben formal `review` — ihr Code läuft mit, ihre niedrigen
-Befunde gehören in `sdd-betrieb`.
+`deployed` gesetzt. B04–B06 gingen ebenfalls live, blieben zunächst formal `review` und
+wurden nach Abarbeitung der niedrigen Befunde (BF-10/11/12, s. `befunde.md`) am 2026-09-11
+auf `deployed` gesetzt.
 
 **Nachprüfung auf Prod grün:** `/`→`/lb` (301), `/lb`/`/en` (200), `/health` (`ok`),
 Encore-CSS + AssetMapper-JS (200, keine 404), sauberes 404 ohne Stacktrace (`APP_DEBUG=0`),
