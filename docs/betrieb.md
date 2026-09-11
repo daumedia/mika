@@ -5,6 +5,10 @@ https://michael-ferreira.com · Datenschutzstufe: **A**
 
 Eingerichtet über `sdd-betrieb`. Was hier steht, ist der Betriebszustand — nicht der Code.
 
+**Wo die Alarme auflaufen:** Ausfall/`/health`-DOWN → **Uptime Kuma → Telegram**. Neue
+Anwendungsfehler (Server + Client) → **Sentry (EU) → E-Mail**. Beide Ketten sind mit einem
+echten Auslöser getestet (2026-09-11).
+
 ## Was eingerichtet ist
 
 | Bereich | Zustand | Wo |
@@ -17,7 +21,7 @@ Eingerichtet über `sdd-betrieb`. Was hier steht, ist der Betriebszustand — ni
 | Fehler-Tracking | ✅ Sentry Cloud (EU) aktiv; `SENTRY_DSN` in Coolify; Testereignis + Alarm-Mail bestätigt 2026-09-11 | `config/packages/sentry.yaml` |
 | Health-Endpunkt | ✅ `/health` → `ok` | `src/Controller/HealthController.php` |
 | Uptime-Überwachung | ✅ Uptime Kuma (**separater Server**), `/health` Keyword `ok`, Telegram-Alarm; **DOWN→Alarm→Recovery getestet 2026-09-11** | — |
-| DB-Sicherung | ⏳ offen — in Coolify aktivieren | siehe unten |
+| DB-Sicherung | 🔴 **bewusst zurückgestellt** (Betreiber, 2026-09-11) — bis dahin KEINE Sicherung: bei Serververlust sind News-Inhalte + Admin-Konto weg (neu erfassbar, aber verloren) | siehe unten |
 
 **Live-verifiziert am 2026-09-11** (nach Deploy auf `master`): Security-Header inkl. HSTS
 gesetzt, `X-Powered-By` weg, `/admin`-Redirect nun `https://`, Google-Fonts-Link entfernt,
