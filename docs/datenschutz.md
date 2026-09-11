@@ -23,12 +23,12 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 | Dienst | Rolle | Region | AV-Vertrag | Status |
 |---|---|---|---|---|
 | Hosting (Coolify-Server) | Betrieb App + DB | **prüfen** (sollte EU sein) | **offen** — beim Anbieter abschließen/ablegen | ⏳ |
-| Sentry | Fehler-Tracking | EU (Frankfurt) — **gegenprüfen** (`…ingest.de.sentry.io`) | **offen** — DPA im Sentry-Konto bestätigen | ✅ aktiv seit 2026-09-11 |
+| Sentry | Fehler-Tracking | ✅ EU (Frankfurt) bestätigt | **offen** — DPA im Sentry-Konto bestätigen | ✅ aktiv seit 2026-09-11 |
 
 ## Drittlandübermittlung
 
-Keine — sofern Hosting **EU** und Sentry-Region **EU** ist. Beides oben als offener Punkt
-markiert; vor Aktivierung von Sentry bestätigen.
+Sentry-Region **EU** (Frankfurt) bestätigt. Keine Drittlandübermittlung, sofern auch das
+**Hosting EU** ist — das bleibt oben als offener Punkt markiert.
 
 ## Gelöst
 
@@ -41,5 +41,5 @@ markiert; vor Aktivierung von Sentry bestätigen.
   in LU erwartet. Existenz/Fassung prüfen und hier mit Datum vermerken. (Inhalt = Aufgabe
   des Betreibers, ggf. mit fachlichem Rat.)
 - **Hosting-AV-Vertrag** abschließen und Ablageort notieren.
-- **Sentry-DPA** bei Aktivierung bestätigen, Region EU sicherstellen.
+- **Sentry-DPA** im Konto bestätigen (Region EU ist bestätigt).
 - **Server-Log-Aufbewahrung** beim Hoster prüfen und kurz halten.

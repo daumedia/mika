@@ -35,8 +35,8 @@ mit `php bin/console sentry:test` → Issue in Sentry erschienen **und** Alarm-M
 „new issue") angekommen. Datenschutz im Code: `send_default_pii: false` (keine IPs,
 keine Request-Bodies); in Dev/Test bleibt Sentry stumm.
 
-Offen (Datenschutz, siehe `docs/datenschutz.md`): **DPA im Sentry-Konto** bestätigen und
-EU-Region final gegenprüfen (`…ingest.de.sentry.io`).
+EU-Region bestätigt (`…ingest.de.sentry.io`). Offen (Datenschutz, siehe
+`docs/datenschutz.md`): nur noch **DPA im Sentry-Konto** bestätigen.
 
 ### 2 · Uptime-Überwachung — ✅ erledigt (2026-09-11)
 **Uptime Kuma** auf einem **separaten Server** prüft `https://michael-ferreira.com/health`
