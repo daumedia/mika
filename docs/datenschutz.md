@@ -22,7 +22,7 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 
 | Dienst | Rolle | Region | AV-Vertrag | Status |
 |---|---|---|---|---|
-| Hosting — **Hostinger** (Hostinger Operations UAB) | Betrieb App + DB | ✅ **DE (EU)** bestätigt — Rechenzentrum Düsseldorf (IP-Geolokalisierung 2026-09-11) | **offen** — AV-Vertrag/DPA bei Hostinger abschließen und ablegen | ✅ aktiv |
+| Hosting — **Hostinger** (Hostinger International Ltd., CY) | Betrieb App + DB | ✅ **DE (EU)** bestätigt — Rechenzentrum Düsseldorf (IP-Geolokalisierung 2026-09-11) | ✅ DPA gilt über die ToS (Art. 28, EU-SCC Modul 2/3), https://www.hostinger.com/legal/dpa (Stand 2026-08-18), notiert 2026-09-11 | ✅ aktiv |
 | Sentry | Fehler-Tracking | ✅ EU (Frankfurt) bestätigt | ✅ DPA bestätigt 2026-09-11 | ✅ aktiv seit 2026-09-11 |
 
 ## Drittlandübermittlung
@@ -40,7 +40,9 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 - ~~Impressum + Datenschutzerklärung veröffentlicht + fachlich geprüft~~ ✅ erledigt
   2026-09-11 (Feature 01 live unter `/impressum` und `/datenschutz`; Texte vom Betreiber
   fachlich abgesegnet, OF-03).
-- **Hosting-AV-Vertrag/DPA bei Hostinger** abschließen und Ablageort notieren (Region DE/EU
-  ist bestätigt).
+- ~~Hosting-AV-Vertrag/DPA bei Hostinger~~ ✅ erledigt 2026-09-11 — Hostingers DPA (Art. 28,
+  EU-SCC) gilt automatisch über die Zustimmung zu den Terms of Service (keine separate
+  Unterschrift nötig), Ablage: https://www.hostinger.com/legal/dpa. Sub-Auftragsverarbeiter
+  sind über die SCC abgedeckt; neue mit 10-Tage-Widerspruchsrecht.
 - ~~Sentry-DPA + EU-Region~~ ✅ erledigt 2026-09-11 (EU bestätigt, DPA bestätigt).
 - **Server-Log-Aufbewahrung** beim Hoster prüfen und kurz halten.
