@@ -11,7 +11,6 @@ Auditberichts, den `/sdd-erfassen abschluss` daraus baut.
 |---|---|---|---|---|---|
 | BF-05 | B02 | `category` auf DB-Ebene unbeschränkt (kein Enum/CHECK) — unbekannter Wert → fehlende Übersetzung | niedrig | `src/Entity/News.php:36` | 2026-09-10 |
 | BF-06 | B02 | Kein Objekt-Voter — jeder Admin ändert/löscht jeden Beitrag (nur bei mehreren Redakteuren relevant) | niedrig | `src/Controller/AdminController.php` | 2026-09-10 |
-| BF-07 | B02 | Inline-`<script>` im News-Formular ohne CSP-Nonce | niedrig | `templates/admin/news_form.html.twig:118` | 2026-09-10 |
 | BF-09 | B03 | Keine Paginierung — `findAllPublished()` lädt alle Beiträge | niedrig | `src/Repository/NewsRepository.php:22` | 2026-09-10 |
 | BF-10 | B04 | `|raw` auf Übersetzungsstrings (latenter XSS-Pfad, aktuell entwicklerkontrolliert) | niedrig | `templates/home/index.html.twig:33,79` | 2026-09-10 |
 | BF-11 | B05 | `ContactType` toter Code (nirgends verdrahtet) | niedrig | `src/Form/ContactType.php` | 2026-09-10 |
@@ -27,6 +26,8 @@ Auditberichts, den `/sdd-erfassen abschluss` daraus baut.
 | BF-04 | B02 | Doppelter Slug → HTTP 500 statt Feldfehler | mittel | 2026-09-10 | noch nicht (nur behoben, `UniqueEntity`) |
 | BF-08 | B03 | Geplanter Beitrag über Direkt-URL abrufbar | mittel | 2026-09-10 | noch nicht (nur behoben, Datumsfilter in `show()`) |
 | BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | **2026-09-11 (deployt)** — `jspm.io` site-weit aus dem Prod-HTML verschwunden |
+| BF-07 | B02 | Inline-`<script>` + `onclick`/`onsubmit` im Admin (News-Formular, Dashboard) — verhindert strikte CSP | niedrig | 2026-09-11 | noch nicht (Inline-JS → Stimulus-Controller `news-form`/`confirm`) |
+| BF-14 | projektweit | Lokale Stimulus-Controller wurden von Encore **nicht** gebündelt (`startStimulusApp()` ohne `require.context`); sie liefen nur über die AssetMapper-importmap. Nach BF-13 (importmap entfernt) blieben `nav` (mobiles Menü) & Co. tot — kurz live | mittel | 2026-09-11 | noch nicht (behoben: `require.context` im Bootstrap + fehlendes `core-js` nachinstalliert) |
 
 ## Akzeptiert
 
