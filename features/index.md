@@ -23,7 +23,7 @@ Eigener ID-Namensraum (`01`, `02`, …) — vor dem Code spezifiziert, im Unters
 
 | ID | Feature | Prio | Status | Abhängig von | Zuletzt |
 |---|---|---|---|---|---|
-| 01 | Rechtstexte (Impressum & Datenschutzerklärung) | P1 | planned | B06 | 2026-09-11 · `spec.md` geschrieben (`/sdd-spec`); nächster Schritt `/sdd-architektur 01` |
+| 01 | Rechtstexte (Impressum & Datenschutzerklärung) | P1 | architected | B06 | 2026-09-11 · `design.md` geschrieben (`/sdd-architektur`); nächster Schritt `/sdd-tasks 01` |
 
 ## Wo die Features im Code leben
 
