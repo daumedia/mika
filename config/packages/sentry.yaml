@@ -1,0 +1,18 @@
+sentry:
+    # Leeres DSN = Sentry ist deaktiviert. In Dev/Test bleibt es leer, in
+    # Produktion setzt Coolify SENTRY_DSN auf das Projekt der EU-Region.
+    dsn: '%env(SENTRY_DSN)%'
+
+    # Keine personenbezogenen Daten an Sentry (Datenschutz Stufe A): keine
+    # IP-Adressen, keine Request-Bodies, keine Cookies/Header mit Nutzerbezug.
+    options:
+        send_default_pii: false
+
+when@dev:
+    sentry:
+        # Im Entwicklungsbetrieb nie senden, auch nicht versehentlich mit gesetztem DSN.
+        dsn: ~
+
+when@test:
+    sentry:
+        dsn: ~

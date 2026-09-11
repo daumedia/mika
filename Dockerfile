@@ -135,6 +135,9 @@ opcache.validate_timestamps = 0
 
 memory_limit = 256M
 
+; Kein X-Powered-By: verschweigt die PHP-Version in jeder Antwort.
+expose_php = Off
+
 ; Zeitzone der Anwendung.
 date.timezone = Europe/Luxembourg
 
