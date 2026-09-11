@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Wo Tailwind nach verwendeten Klassen sucht (relativ zu dieser Datei). Ohne @source
+   fehlen die Utilities im Encore-Build. */
+@source "../../templates";
+@source "../../src";
+@source "../../assets";
+
 /* ============================================
    FONTS — lokal ausgeliefert (Datenschutz Stufe A)
    Fraunces + Figtree werden aus public/fonts/ geladen statt von Google

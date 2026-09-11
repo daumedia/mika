@@ -34,6 +34,11 @@ Encore
         };
     })
 
+    // Tailwind v4 über PostCSS (postcss.config.mjs → @tailwindcss/postcss). Ohne diesen
+    // Loader kompiliert Encore die Utilities nicht und die Seite bleibt unstyled — genau
+    // das brach, als die AssetMapper-Hälfte (die Tailwind zuvor baute) entfernt wurde.
+    .enablePostCssLoader()
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
