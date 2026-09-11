@@ -16,6 +16,15 @@ QA je Feature (`/sdd-qa BNN`), danach der Auditbericht (`/sdd-erfassen abschluss
 | B05 | Kontaktseite | P1 | review | B06 | 2026-09-10 · QA: production-ready, 1 niedrig (Code live im Monolithen; Befund → sdd-betrieb) |
 | B06 | Zweisprachigkeit (LB/EN) | P0 | review | — | 2026-09-10 · QA: production-ready, 1 niedrig (Code live im Monolithen; Befund → sdd-betrieb) |
 
+## Neue Features (durch die Kette)
+
+Eigener ID-Namensraum (`01`, `02`, …) — vor dem Code spezifiziert, im Unterschied zum
+`B`-Bestand.
+
+| ID | Feature | Prio | Status | Abhängig von | Zuletzt |
+|---|---|---|---|---|---|
+| 01 | Rechtstexte (Impressum & Datenschutzerklärung) | P1 | planned | B06 | 2026-09-11 · `spec.md` geschrieben (`/sdd-spec`); nächster Schritt `/sdd-architektur 01` |
+
 ## Wo die Features im Code leben
 
 | ID | Zweck (ein Satz) | Kernstellen |
