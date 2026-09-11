@@ -87,8 +87,9 @@ Encore-CSS + AssetMapper-JS (200, keine 404), sauberes 404 ohne Stacktrace (`APP
 kein Dev-Profiler, `/admin` ohne Login → Redirect, **Login-Throttling greift nach 5
 Versuchen**, **`admin/admin`-Fixture funktioniert nicht**.
 
-**Noch durch Mika zu bestätigen (einmalig, braucht Zugangsdaten):** echte Admin-Anmeldung
-funktioniert; keine Testdaten in der News-Liste sichtbar.
+**Nachprüfung vollständig (2026-09-11):** echte Admin-Anmeldung von Mika bestätigt;
+öffentliche News-Liste (`/lb/news`) zeigt den Leerzustand „Keng Noriichten am Moment." —
+keine Testdaten. Damit ist die Regel-3-Checkliste komplett grün.
 
 **Nachsorge → `sdd-betrieb`:** Monitoring/Uptime/Fehler-Tracking (Erstprojekt, noch keins);
 kleine Härtungsfunde aus der Prod-Prüfung: Login-Redirect ging auf `http://` statt `https://`
