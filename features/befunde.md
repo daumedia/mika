@@ -26,8 +26,8 @@ Auditberichts, den `/sdd-erfassen abschluss` daraus baut.
 | BF-04 | B02 | Doppelter Slug → HTTP 500 statt Feldfehler | mittel | 2026-09-10 | noch nicht (nur behoben, `UniqueEntity`) |
 | BF-08 | B03 | Geplanter Beitrag über Direkt-URL abrufbar | mittel | 2026-09-10 | noch nicht (nur behoben, Datumsfilter in `show()`) |
 | BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | **2026-09-11 (deployt)** — `jspm.io` site-weit aus dem Prod-HTML verschwunden |
-| BF-07 | B02 | Inline-`<script>` + `onclick`/`onsubmit` im Admin (News-Formular, Dashboard) — verhindert strikte CSP | niedrig | 2026-09-11 | noch nicht (Inline-JS → Stimulus-Controller `news-form`/`confirm`) |
-| BF-14 | projektweit | Lokale Stimulus-Controller wurden von Encore **nicht** gebündelt (`startStimulusApp()` ohne `require.context`); sie liefen nur über die AssetMapper-importmap. Nach BF-13 (importmap entfernt) blieben `nav` (mobiles Menü) & Co. tot — kurz live | mittel | 2026-09-11 | noch nicht (behoben: `require.context` im Bootstrap + fehlendes `core-js` nachinstalliert) |
+| BF-07 | B02 | Inline-`<script>` + `onclick`/`onsubmit` im Admin (News-Formular, Dashboard) — verhindert strikte CSP | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — Inline-JS → Stimulus `news-form`/`confirm` |
+| BF-14 | projektweit | Lokale Stimulus-Controller wurden von Encore **nicht** gebündelt (`startStimulusApp()` ohne `require.context`); sie liefen nur über die AssetMapper-importmap. Nach BF-13 (importmap entfernt) blieben `nav` (mobiles Menü) & Co. tot — kurz live | mittel | 2026-09-11 | **2026-09-11 (deployt)** — `require.context` im Bootstrap + `core-js`; `nav` im Prod-`app.js` bestätigt |
 
 ## Akzeptiert
 
