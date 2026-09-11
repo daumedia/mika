@@ -25,10 +25,10 @@ abgeschlossen: BF-05/10/11/12 behoben, BF-06/09 bewusst akzeptiert (siehe unten)
 | BF-13 | 01 / projektweit | `importmap('app')`-Polyfill lud `es-module-shims` von `ga.jspm.io` (Besucher-IP an Dritt-CDN auf jeder Seite) | hoch | 2026-09-11 | **2026-09-11 (deployt)** — `jspm.io` site-weit aus dem Prod-HTML verschwunden |
 | BF-07 | B02 | Inline-`<script>` + `onclick`/`onsubmit` im Admin (News-Formular, Dashboard) — verhindert strikte CSP | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — Inline-JS → Stimulus `news-form`/`confirm` |
 | BF-14 | projektweit | Lokale Stimulus-Controller wurden von Encore **nicht** gebündelt (`startStimulusApp()` ohne `require.context`); sie liefen nur über die AssetMapper-importmap. Nach BF-13 (importmap entfernt) blieben `nav` (mobiles Menü) & Co. tot — kurz live | mittel | 2026-09-11 | **2026-09-11 (deployt)** — `require.context` im Bootstrap + `core-js`; `nav` im Prod-`app.js` bestätigt |
-| BF-05 | B02 | `category` als Magic-String ohne Typsicherheit — unbekannter Wert → fehlende Übersetzung | niedrig | 2026-09-11 | noch nicht (nur behoben, lokal verifiziert) — Backed-Enum `App\Enum\NewsCategory` + `enumType` an der Entität, `EnumType` im Formular; keine Migration nötig (Spaltentyp unverändert, `schema:validate` grün) |
-| BF-10 | B04 | `|raw` auf Übersetzungsstrings (latenter XSS-Pfad, aktuell entwicklerkontrolliert) | niedrig | 2026-09-11 | noch nicht (nur behoben, lokal verifiziert) — `<em>`-Markup ins Template geholt, Übersetzungen sind reiner Text; `|raw` projektweit weg |
-| BF-11 | B05 | `ContactType` toter Code (nirgends verdrahtet) | niedrig | 2026-09-11 | noch nicht (nur behoben, lokal verifiziert) — `src/Form/ContactType.php` gelöscht |
-| BF-12 | B06 | Kein `hreflang` für die Sprachfassungen (SEO) | niedrig | 2026-09-11 | noch nicht (nur behoben, lokal verifiziert) — `hreflang` lb/en/x-default im `<head>` je Seite, `slug` erhalten, `_locale`-Default gefiltert |
+| BF-05 | B02 | `category` als Magic-String ohne Typsicherheit — unbekannter Wert → fehlende Übersetzung | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — Backed-Enum `App\Enum\NewsCategory` + `enumType` an der Entität, `EnumType` im Formular; keine Migration nötig (Spaltentyp unverändert, `schema:validate` grün) |
+| BF-10 | B04 | `|raw` auf Übersetzungsstrings (latenter XSS-Pfad, aktuell entwicklerkontrolliert) | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — `<em>`-Markup ins Template geholt, Übersetzungen sind reiner Text; `|raw` projektweit weg |
+| BF-11 | B05 | `ContactType` toter Code (nirgends verdrahtet) | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — `src/Form/ContactType.php` gelöscht |
+| BF-12 | B06 | Kein `hreflang` für die Sprachfassungen (SEO) | niedrig | 2026-09-11 | **2026-09-11 (deployt)** — `hreflang` lb/en/x-default im `<head>` je Seite, `slug` erhalten, `_locale`-Default gefiltert |
 
 ## Akzeptiert
 
