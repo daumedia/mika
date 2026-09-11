@@ -23,7 +23,7 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 | Dienst | Rolle | Region | AV-Vertrag | Status |
 |---|---|---|---|---|
 | Hosting (Coolify-Server) | Betrieb App + DB | **prüfen** (sollte EU sein) | **offen** — beim Anbieter abschließen/ablegen | ⏳ |
-| Sentry | Fehler-Tracking | ✅ EU (Frankfurt) bestätigt | **offen** — DPA im Sentry-Konto bestätigen | ✅ aktiv seit 2026-09-11 |
+| Sentry | Fehler-Tracking | ✅ EU (Frankfurt) bestätigt | ✅ DPA bestätigt 2026-09-11 | ✅ aktiv seit 2026-09-11 |
 
 ## Drittlandübermittlung
 
@@ -41,5 +41,5 @@ Sentry-Region **EU** (Frankfurt) bestätigt. Keine Drittlandübermittlung, sofer
   in LU erwartet. Existenz/Fassung prüfen und hier mit Datum vermerken. (Inhalt = Aufgabe
   des Betreibers, ggf. mit fachlichem Rat.)
 - **Hosting-AV-Vertrag** abschließen und Ablageort notieren.
-- **Sentry-DPA** im Konto bestätigen (Region EU ist bestätigt).
+- ~~Sentry-DPA + EU-Region~~ ✅ erledigt 2026-09-11 (EU bestätigt, DPA bestätigt).
 - **Server-Log-Aufbewahrung** beim Hoster prüfen und kurz halten.
