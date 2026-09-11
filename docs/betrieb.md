@@ -16,7 +16,7 @@ Eingerichtet über `sdd-betrieb`. Was hier steht, ist der Betriebszustand — ni
 | Schriften lokal | ✅ Fraunces + Figtree aus `public/fonts/` (keine Besucher-IP an Google) | `assets/styles/app.css`, `templates/base.html.twig` |
 | Fehler-Tracking | ⏳ Code verdrahtet, **inaktiv** bis `SENTRY_DSN` gesetzt | `config/packages/sentry.yaml` |
 | Health-Endpunkt | ✅ `/health` → `ok` | `src/Controller/HealthController.php` |
-| Uptime-Überwachung | 🟡 Monitor live (Uptime Kuma, **separater Server**, `/health`, Keyword `ok`); Alarm-Kanal noch offen | siehe unten |
+| Uptime-Überwachung | ✅ Uptime Kuma (**separater Server**), `/health` Keyword `ok`, Telegram-Alarm; **DOWN→Alarm→Recovery getestet 2026-09-11** | — |
 | DB-Sicherung | ⏳ offen — in Coolify aktivieren | siehe unten |
 
 **Live-verifiziert am 2026-09-11** (nach Deploy auf `master`): Security-Header inkl. HSTS
@@ -35,14 +35,14 @@ gesetzt, `X-Powered-By` weg, `/admin`-Redirect nun `https://`, Google-Fonts-Link
 Datenschutz ist im Code schon berücksichtigt: `send_default_pii: false` (keine IPs,
 keine Request-Bodies). In Dev/Test bleibt Sentry immer stumm.
 
-### 2 · Uptime-Überwachung (UptimeRobot oder Better Stack)
-1. Monitor Typ HTTP(S) auf `https://michael-ferreira.com/health`, Intervall 5 min,
-   Erwartung: Statuscode 200 **und** Text enthält `ok`.
-2. Zertifikats-Ablaufwarnung aktivieren (Coolifys Let's-Encrypt erneuert automatisch,
-   die Warnung ist das Sicherheitsnetz).
-3. Alarmweg: E-Mail **und** ein zweiter Kanal (Push/Telegram), damit ein Ausfall dich
-   erreicht, auch wenn die Mail liegen bleibt.
-4. **Alarm testen:** Container in Coolify kurz stoppen, prüfen, dass der Alarm ankommt.
+### 2 · Uptime-Überwachung — ✅ erledigt (2026-09-11)
+**Uptime Kuma** auf einem **separaten Server** prüft `https://michael-ferreira.com/health`
+(Keyword-Monitor, Keyword `ok`). Alarm über **Telegram**. Die Alarmkette wurde getestet:
+Keyword kurz auf `zzz-test` → Monitor DOWN → Telegram-Alarm kam → Keyword zurück → grün;
+`/health` war laut Gegenprobe die ganze Zeit `ok`.
+
+Noch sinnvoll (optional): in Uptime Kuma die **Zertifikats-Ablaufwarnung** aktivieren —
+Coolifys Let's-Encrypt erneuert zwar automatisch, die Warnung ist das Sicherheitsnetz.
 
 ### 3 · Datenbank-Sicherung (Coolify)
 1. Bei der MySQL-Ressource in Coolify **Scheduled Backups** aktivieren, täglich.
