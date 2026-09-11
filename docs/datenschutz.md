@@ -23,7 +23,7 @@ Verarbeitung auf dem Server (der Versand läuft im E-Mail-Programm des Besuchers
 | Dienst | Rolle | Region | AV-Vertrag | Status |
 |---|---|---|---|---|
 | Hosting (Coolify-Server) | Betrieb App + DB | **prüfen** (sollte EU sein) | **offen** — beim Anbieter abschließen/ablegen | ⏳ |
-| Sentry | Fehler-Tracking | EU (Frankfurt) — bei Einrichtung wählen | **offen** — DPA im Sentry-Konto bestätigen | ⏳ (aktiv erst mit `SENTRY_DSN`) |
+| Sentry | Fehler-Tracking | EU (Frankfurt) — **gegenprüfen** (`…ingest.de.sentry.io`) | **offen** — DPA im Sentry-Konto bestätigen | ✅ aktiv seit 2026-09-11 |
 
 ## Drittlandübermittlung
 

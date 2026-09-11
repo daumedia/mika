@@ -14,7 +14,7 @@ Eingerichtet über `sdd-betrieb`. Was hier steht, ist der Betriebszustand — ni
 | PHP-Version verborgen | ✅ `expose_php = Off` (kein `X-Powered-By`) | `Dockerfile` (zz-app.ini) |
 | HTTPS-Erkennung | ✅ Trusted-Proxy → korrekte `https://`-URLs hinter Coolify | `config/packages/framework.yaml` |
 | Schriften lokal | ✅ Fraunces + Figtree aus `public/fonts/` (keine Besucher-IP an Google) | `assets/styles/app.css`, `templates/base.html.twig` |
-| Fehler-Tracking | ⏳ Code verdrahtet, **inaktiv** bis `SENTRY_DSN` gesetzt | `config/packages/sentry.yaml` |
+| Fehler-Tracking | ✅ Sentry Cloud (EU) aktiv; `SENTRY_DSN` in Coolify; Testereignis + Alarm-Mail bestätigt 2026-09-11 | `config/packages/sentry.yaml` |
 | Health-Endpunkt | ✅ `/health` → `ok` | `src/Controller/HealthController.php` |
 | Uptime-Überwachung | ✅ Uptime Kuma (**separater Server**), `/health` Keyword `ok`, Telegram-Alarm; **DOWN→Alarm→Recovery getestet 2026-09-11** | — |
 | DB-Sicherung | ⏳ offen — in Coolify aktivieren | siehe unten |
@@ -25,15 +25,14 @@ gesetzt, `X-Powered-By` weg, `/admin`-Redirect nun `https://`, Google-Fonts-Link
 
 ## Offene Hand-off-Schritte (brauchen dein Konto / die Coolify-Oberfläche)
 
-### 1 · Fehler-Tracking scharfschalten (Sentry, EU-Region)
-1. Projekt in Sentry anlegen, **Region EU** (Frankfurt), Plattform „Symfony".
-2. DSN kopieren, in Coolify als Env `SENTRY_DSN=<dsn>` setzen, App neu deployen.
-3. Alarm auf **neue Fehlerarten** stellen (nicht jedes Auftreten), Empfänger deine E-Mail.
-4. **Alarm testen:** eine künstliche Exception auslösen und prüfen, dass die Mail ankommt.
-5. Sentry-DPA (Auftragsverarbeitung) im Konto bestätigen → in `docs/datenschutz.md` eintragen.
+### 1 · Fehler-Tracking (Sentry) — ✅ erledigt (2026-09-11)
+Sentry Cloud **EU-Region** aktiv, `SENTRY_DSN` als Coolify-Env, App redeployt. Getestet
+mit `php bin/console sentry:test` → Issue in Sentry erschienen **und** Alarm-Mail (Regel
+„new issue") angekommen. Datenschutz im Code: `send_default_pii: false` (keine IPs,
+keine Request-Bodies); in Dev/Test bleibt Sentry stumm.
 
-Datenschutz ist im Code schon berücksichtigt: `send_default_pii: false` (keine IPs,
-keine Request-Bodies). In Dev/Test bleibt Sentry immer stumm.
+Offen (Datenschutz, siehe `docs/datenschutz.md`): **DPA im Sentry-Konto** bestätigen und
+EU-Region final gegenprüfen (`…ingest.de.sentry.io`).
 
 ### 2 · Uptime-Überwachung — ✅ erledigt (2026-09-11)
 **Uptime Kuma** auf einem **separaten Server** prüft `https://michael-ferreira.com/health`
