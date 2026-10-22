@@ -14,7 +14,12 @@
 #
 # FrankenPHP fährt im klassischen Request-pro-Prozess-Modell (kein Worker-Mode).
 
-ARG PHP_VERSION=8.4
+# PHP bewusst auf die Patch-Version gepinnt: 8.4.27 (21.10.2026) schließt die
+# Pre-Auth-RCE CVE-2026-109618/-109619. Mit dem gleitenden Tag `php8.4` hätte
+# ein Build mit gecachtem Basisimage still die alte, verwundbare Version
+# behalten — ein neuer Tag-Name erzwingt den frischen Pull. Bei jedem PHP-
+# Sicherheitsrelease hier hochziehen.
+ARG PHP_VERSION=8.4.27
 ARG FRANKENPHP_VERSION=1
 ARG NODE_VERSION=24
 
@@ -145,6 +150,12 @@ date.timezone = Europe/Luxembourg
 session.cookie_httponly = 1
 session.cookie_samesite = Lax
 session.use_strict_mode = 1
+
+; Upload-Fortschritt aus: Die App nimmt keine Datei-Uploads an, die Funktion
+; ist also ungenutzt — gilt aber als Angriffsweg des bekannten Exploits
+; der Pre-Auth-RCE CVE-2026-109618/-109619 (PHP < 8.4.27). Härtung
+; zusätzlich zum Patch, kein Ersatz dafür.
+session.upload_progress.enabled = 0
 INI
 
 COPY --from=vendor  /app                   /app
