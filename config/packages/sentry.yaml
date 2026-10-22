@@ -8,6 +8,13 @@ sentry:
     options:
         send_default_pii: false
 
+        # 404/405 sind kein Fehler der App, sondern meist Bot-Scanner, die nach
+        # fremden Endpunkten suchen (/api/actuator, /wp-login.php, /.env …).
+        # Monolog schließt dieselben Codes schon aus (excluded_http_codes).
+        ignore_exceptions:
+            - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+            - Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+
 when@dev:
     sentry:
         # Im Entwicklungsbetrieb nie senden, auch nicht versehentlich mit gesetztem DSN.
