@@ -11,9 +11,16 @@ sentry:
         # 404/405 sind kein Fehler der App, sondern meist Bot-Scanner, die nach
         # fremden Endpunkten suchen (/api/actuator, /wp-login.php, /.env …).
         # Monolog schließt dieselben Codes schon aus (excluded_http_codes).
+        #
+        # AccessDeniedException entsteht, wenn jemand ohne Login /admin aufruft.
+        # Die Security leitet dann nur auf /login um, aber Sentry (Listener-
+        # Priorität 128) fängt die Exception ab, bevor die Firewall (Priorität 1)
+        # sie behandelt. Ein eingeloggter Admin hat immer ROLE_ADMIN
+        # (Admin::getRoles), ein echter Rechtefehler ist hier also nicht möglich.
         ignore_exceptions:
             - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
             - Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+            - Symfony\Component\Security\Core\Exception\AccessDeniedException
 
 when@dev:
     sentry:
