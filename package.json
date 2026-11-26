@@ -5,7 +5,7 @@
     "build": "encore production"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^6.0.0",
+    "@symfony/webpack-encore": "^7.2.1",
     "@tailwindcss/postcss": "^4.2.2",
     "postcss-loader": "^8.2.1"
   },
